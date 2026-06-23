@@ -1,0 +1,16 @@
+{
+  "name": "V FORMI — Postani najboljša verzija sebe",
+  "short_name": "V FORMI",
+  "description": "Slovenska fitnes aplikacija: sledenje kalorijam, skeniranje črtnih kod, treningi in recepti.",
+  "lang": "sl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a1812",
+  "theme_color": "#0a1812",
+  "categories": ["health", "fitness", "lifestyle"],
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

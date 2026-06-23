@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0e0e10" />
+  <title>POBELI ME | Maribor</title>
+  <meta name="description" content="POBELI ME — barvanje in kitanje sten do perfekcije v Mariboru in okolici. Počistimo za sabo in odpeljemo staro na deponijo. Čisto, natančno in brez nereda. Vaš prostor, pobarvan v zgodbo. Brezplačen ogled." />
+  <meta name="keywords" content="pleskar Maribor, pleskarstvo, barvanje sten, kitanje sten, pleskanje, beljenje sten, odvoz na deponijo, čiščenje" />
+  <meta name="author" content="Pobeli Me" />
+  <link rel="canonical" href="https://pobelime.si/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="POBELI ME" />
+  <meta property="og:locale" content="sl_SI" />
+  <meta property="og:title" content="POBELI ME" />
+  <meta property="og:description" content="Barvanje in kitanje sten do perfekcije. Brez nereda, brez stresa — samo barve, ki spremenijo vse." />
+  <meta property="og:url" content="https://pobelime.si/" />
+  <meta property="og:image" content="assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="POBELI ME" />
+  <meta name="twitter:description" content="Pobarvamo vaš prostor v zgodbo. Pleskarstvo z dušo iz Maribora." />
+  <meta name="twitter:image" content="assets/og-image.png" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Structured data: lokalno podjetje -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HousePainter",
+    "name": "Pobeli Me",
+    "description": "Barvanje in kitanje sten, perfektne stene, čiščenje in odvoz starih stvari na deponijo. Maribor in okolica.",
+    "image": "https://pobelime.si/assets/logo.png",
+    "url": "https://pobelime.si/",
+    "telephone": "+386 70 577 333",
+    "email": "info@pobelime.si",
+    "priceRange": "€€",
+    "areaServed": "Maribor in okolica, Štajerska",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Maribor",
+      "addressCountry": "SI"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "07:00",
+      "closes": "18:00"
+    },
+    "sameAs": ["https://instagram.com/pobeli.me"]
+  }
+  </script>
+</head>
+<body>
+  <a href="#vrh" class="skip">Preskoči na vsebino</a>
+
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__inner">
+      <span class="preloader__word" data-text="POBELI ME">POBELI ME</span>
+      <div class="preloader__bar"><i></i></div>
+    </div>
+    <div class="preloader__paint"></div>
+  </div>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="cursor" id="cursor"><span></span></div>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <a href="#vrh" class="nav__brand" data-cursor="hover" aria-label="POBELI ME — domov">
+      <span class="nav__name">Pobeli Me</span>
+    </a>
+    <nav class="nav__links" aria-label="Glavna navigacija">
+      <a href="#storitve" data-cursor="hover">Storitve</a>
+      <a href="#projekti" data-cursor="hover">Projekti</a>
+      <a href="#kalkulator" data-cursor="hover">Cena</a>
+      <a href="#postopek" data-cursor="hover">Postopek</a>
+      <a href="#onas" data-cursor="hover">O nas</a>
+    </nav>
+    <a href="#kontakt" class="btn btn--pill nav__cta" data-cursor="hover">
+      <span>Brezplačna ponudba</span>
+    </a>
+    <button class="nav__burger" id="burger" aria-label="Meni"><i></i><i></i></button>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="menu" id="menu">
+    <nav>
+      <a href="#storitve">Storitve</a>
+      <a href="#projekti">Projekti</a>
+      <a href="#kalkulator">Cena</a>
+      <a href="#postopek">Postopek</a>
+      <a href="#onas">O nas</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <div class="menu__foot">
+      <a href="tel:+38670577333">+386 70 577 333</a>
+      <a href="mailto:info@pobelime.si">info@pobelime.si</a>
+    </div>
+  </div>
+
+  <main id="vrh">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__lava" aria-hidden="true">
+        <div class="hero__blob hero__blob--1"></div>
+        <div class="hero__blob hero__blob--2"></div>
+        <div class="hero__blob hero__blob--3"></div>
+      </div>
+      <div class="hero__grain"></div>
+
+      <img class="hero__logo" src="assets/logo.png" alt="POBELI ME — deček s čopičem" aria-hidden="true" />
+
+      <div class="hero__inner">
+        <p class="hero__eyebrow reveal" data-cursor="hover"><span class="dot"></span> Brez čakanja · eno stranko naenkrat</p>
+        <h1 class="hero__title">
+          <span class="line"><span class="up">Pobarvamo vaš</span></span>
+          <span class="line"><span class="up">prostor v <em class="ink">zgodbo</em>.</span></span>
+        </h1>
+        <p class="hero__lead reveal">Barvanje in kitanje sten do perfekcije. Počistimo za sabo in
+          odpeljemo staro na deponijo — brez nereda, brez stresa.</p>
+        <div class="hero__actions reveal">
+          <a href="#kontakt" class="btn btn--solid magnetic" data-cursor="hover"><span>Začni projekt</span></a>
+          <a href="#projekti" class="btn btn--ghost magnetic" data-cursor="hover"><span>Oglej si dela ↗</span></a>
+        </div>
+      </div>
+
+      <div class="hero__stats reveal">
+        <div class="stat"><b data-count="640">0</b><span>zaključenih projektov</span></div>
+        <div class="stat"><b data-count="7">0</b><span>let izkušenj</span></div>
+        <div class="stat"><b data-count="100" data-suffix="%">0</b><span>zadovoljstvo</span></div>
+      </div>
+
+      <div class="hero__scroll" aria-hidden="true"><span>pomik</span><i></i></div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Barvanje sten</span><span class="sep">✶</span>
+        <span>Kitanje</span><span class="sep">✶</span>
+        <span>Perfektne stene</span><span class="sep">✶</span>
+        <span>Čiščenje za sabo</span><span class="sep">✶</span>
+        <span>Odvoz na deponijo</span><span class="sep">✶</span>
+        <span>Barvanje sten</span><span class="sep">✶</span>
+        <span>Kitanje</span><span class="sep">✶</span>
+        <span>Perfektne stene</span><span class="sep">✶</span>
+        <span>Čiščenje za sabo</span><span class="sep">✶</span>
+        <span>Odvoz na deponijo</span><span class="sep">✶</span>
+      </div>
+    </div>
+
+    <!-- STORITVE -->
+    <section class="services" id="storitve">
+      <div class="sec-head">
+        <p class="sec-kicker reveal"><span>01</span> Storitve</p>
+        <h2 class="sec-title reveal">Vse, kar vaše stene<br/>potrebujejo — na enem mestu.</h2>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal" data-cursor="hover" style="--accent:var(--c-pink)">
+          <span class="card__no">01</span>
+          <h3>Barvanje sten</h3>
+          <p>Notranje pleskanje stanovanj, hiš in pisarn. Gladko, enakomerno in z ostrimi robovi.</p>
+          <span class="card__arrow">↗</span>
+        </article>
+        <article class="card reveal" data-cursor="hover" style="--accent:var(--c-orange)">
+          <span class="card__no">02</span>
+          <h3>Kitanje & priprava</h3>
+          <p>Zapolnimo razpoke in luknje ter zgladimo podlago — temelj za brezhibno površino.</p>
+          <span class="card__arrow">↗</span>
+        </article>
+        <article class="card reveal" data-cursor="hover" style="--accent:var(--c-violet)">
+          <span class="card__no">03</span>
+          <h3>Perfektne stene</h3>
+          <p>Brušenje in zaključek do popolnoma ravnih, gladkih sten brez sledi in napak.</p>
+          <span class="card__arrow">↗</span>
+        </article>
+        <article class="card reveal" data-cursor="hover" style="--accent:var(--c-blue)">
+          <span class="card__no">04</span>
+          <h3>Čiščenje za sabo</h3>
+          <p>Ko končamo, prostor zapustimo čist — brez prahu, packarij in nereda.</p>
+          <span class="card__arrow">↗</span>
+        </article>
+        <article class="card reveal" data-cursor="hover" style="--accent:var(--c-yellow)">
+          <span class="card__no">05</span>
+          <h3>Odvoz na deponijo</h3>
+          <p>Odpeljemo staro pohištvo in odpadke na deponijo. Vam se ni treba ukvarjati z ničemer.</p>
+          <span class="card__arrow">↗</span>
+        </article>
+        <article class="card card--cta reveal" data-cursor="hover">
+          <h3>Potrebujete pobarvati prostor?</h3>
+          <p>Povejte nam, kaj imate — pridemo na brezplačen ogled.</p>
+          <a href="#kontakt" class="card__link">Pogovorimo se →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- BARVA SPREMENI PROSTOR -->
+    <section class="colorswap" id="barve">
+      <div class="sec-head">
+        <p class="sec-kicker reveal"><span>02</span> Barva spremeni vse</p>
+        <h2 class="sec-title reveal">Ista soba.<br/>Tri razpoloženja.</h2>
+      </div>
+      <div class="swap reveal">
+        <div class="swap__stage">
+          <div class="swap__img" id="swapImg" data-pos="0"></div>
+          <div class="swap__overlay">
+            <span class="swap__label" id="swapLabel">Topla bež</span>
+            <p>Premaknite barvo in poglejte, kako se prostor spremeni.</p>
+          </div>
+        </div>
+        <div class="swap__controls" role="group" aria-label="Izbira barve stene">
+          <button class="swap__btn is-active" data-pos="0" style="--sw:#cfc6b6" aria-label="Topla bež"></button>
+          <button class="swap__btn" data-pos="50" style="--sw:#2c3e52" aria-label="Globoka modra"></button>
+          <button class="swap__btn" data-pos="100" style="--sw:#5f6b4f" aria-label="Žajbelj zelena"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJEKTI -->
+    <section class="work" id="projekti">
+      <div class="sec-head">
+        <p class="sec-kicker reveal"><span>03</span> Izbrani projekti</p>
+        <h2 class="sec-title reveal">Prostori, ki govorijo zase.</h2>
+      </div>
+
+      <div class="gallery">
+        <figure class="shot shot--tall reveal" data-cursor="view">
+          <div class="shot__media" style="background-image:url(assets/room-navy.jpg)"></div>
+        </figure>
+        <figure class="shot reveal" data-cursor="view">
+          <div class="shot__media" style="background-image:url(assets/room-green.jpg)"></div>
+        </figure>
+        <figure class="shot reveal" data-cursor="view">
+          <div class="shot__media" style="background-image:url(assets/painter.jpg)"></div>
+        </figure>
+        <figure class="shot shot--wide reveal" data-cursor="view">
+          <div class="shot__media" style="background-image:url(assets/triptych.jpg);background-size:cover"></div>
+        </figure>
+        <figure class="shot reveal" data-cursor="view">
+          <div class="shot__media" style="background-image:url(assets/family.jpg)"></div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- PRED / POTEM -->
+    <section class="beforeafter" id="prednpotem">
+      <div class="ba__inner">
+        <div class="ba__text reveal">
+          <p class="sec-kicker"><span>04</span> Pred &amp; potem</p>
+          <h2 class="sec-title">Razlika, ki jo<br/>vidite v trenutku.</h2>
+          <p class="ba__p">Od utrujenih, razpokanih sten do prostora, v katerem si želite ostati.
+            Vsak projekt je zgodba o preobrazbi — vaša je naslednja.</p>
+        </div>
+        <figure class="ba__media reveal" data-cursor="view">
+          <img src="assets/before-after.jpg" alt="Soba pred in po pleskanju" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+
+    <!-- POSTOPEK -->
+    <section class="process" id="postopek">
+      <div class="sec-head">
+        <p class="sec-kicker reveal"><span>05</span> Postopek</p>
+        <h2 class="sec-title reveal">Pet korakov do<br/>brezhibnih sten.</h2>
+      </div>
+      <ol class="steps">
+        <li class="step reveal" data-cursor="hover">
+          <span class="step__no">01</span>
+          <h3>Posvet</h3>
+          <p>Pridemo, izmerimo in predvsem — poslušamo, kaj si želite.</p>
+        </li>
+        <li class="step reveal" data-cursor="hover">
+          <span class="step__no">02</span>
+          <h3>Ponudba</h3>
+          <p>Jasna cena na papirju. Brez drobnega tiska in presenečenj.</p>
+        </li>
+        <li class="step reveal" data-cursor="hover">
+          <span class="step__no">03</span>
+          <h3>Priprava</h3>
+          <p>Zaščitimo pohištvo in tla. Vaš dom ostane vaš dom.</p>
+        </li>
+        <li class="step reveal" data-cursor="hover">
+          <span class="step__no">04</span>
+          <h3>Izvedba</h3>
+          <p>Natančno delo z vrhunskimi barvami in pravim orodjem.</p>
+        </li>
+        <li class="step reveal" data-cursor="hover">
+          <span class="step__no">05</span>
+          <h3>Predaja</h3>
+          <p>Počistimo za sabo do zadnje kapljice. Vi le uživate.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- KALKULATOR -->
+    <section class="calc" id="kalkulator">
+      <div class="calc__inner">
+        <div class="calc__intro reveal">
+          <p class="sec-kicker"><span>06</span> Okvirna cena</p>
+          <h2 class="sec-title">Izračunajte ceno<br/>v nekaj sekundah.</h2>
+          <p class="calc__p">Vnesite velikost sobe (tloris) — kalkulator sešteje
+            <b>vse stene in strop</b>. Nato izberite vrsto dela in dobite okvirno ceno.
+            Soba ima namreč veliko več površine, kot meri tloris.</p>
+        </div>
+
+        <div class="calc__card reveal">
+          <div class="calc__row">
+            <label for="m2">Velikost sobe (tloris)</label>
+            <output id="m2out">25 m²</output>
+          </div>
+          <input type="range" id="m2" min="6" max="160" step="1" value="25" data-cursor="hover" />
+          <div class="calc__hint"><span>6 m²</span><span>160 m²</span></div>
+
+          <div class="calc__chips" role="group" aria-label="Hitra izbira">
+            <button data-m2="16">Manjša soba ~16 m²</button>
+            <button data-m2="30">Dnevna soba ~30 m²</button>
+            <button data-m2="70">Stanovanje ~70 m²</button>
+          </div>
+
+          <div class="calc__surface">
+            <span>Stene + strop za barvanje</span>
+            <b><span id="surface">77</span> m²</b>
+          </div>
+
+          <div class="calc__opts" role="group" aria-label="Kaj potrebujete">
+            <span class="calc__optlabel">Kaj potrebujete?</span>
+            <div class="calc__optrow">
+              <button type="button" class="calc__opt" data-rate="4" data-cursor="hover">
+                <b>Enojni premaz</b><small>4 €/m²</small></button>
+              <button type="button" class="calc__opt is-active" data-rate="5" data-cursor="hover">
+                <b>Dvojni premaz</b><small>5 €/m²</small></button>
+              <button type="button" class="calc__opt" data-rate="6" data-cursor="hover">
+                <b>Kitanje + brušenje</b><small>6 €/m²</small></button>
+              <button type="button" class="calc__opt" data-rate="10" data-cursor="hover">
+                <b>Celovito · 2× premaz + kitanje + brušenje</b><small>10 €/m²</small></button>
+            </div>
+          </div>
+
+          <div class="calc__result">
+            <div>
+              <span class="calc__label">Vaša okvirna cena</span>
+              <div class="calc__price"><b id="price">385</b> €</div>
+            </div>
+            <a href="#kontakt" class="btn btn--solid magnetic" data-cursor="hover"><span>Želim točno ponudbo</span></a>
+          </div>
+          <p class="calc__fast">⚡ Pokličete in pridemo hitro — delo začnemo brez velikega čakanja.</p>
+          <p class="calc__note">* Ocena upošteva stene in strop (višina pribl. 2,6 m) ter izbrano vrsto dela.
+            Okna in vrata dejansko površino nekoliko znižajo. Ni zavezujoča ponudba.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- O NAS / BANNER -->
+    <section class="about" id="onas">
+      <div class="about__grid">
+        <div class="about__text reveal">
+          <p class="sec-kicker"><span>07</span> O nas</p>
+          <h2 class="about__title">Perfektne stene.<br/>Za sabo počistimo<br/>in odpeljemo staro.</h2>
+          <p class="about__p">Smo majhna, predana ekipa pleskarjev iz Maribora. Zadnjih sedem let
+            spreminjamo navadne stene v prostore, v katerih ljudje radi živijo in delajo.
+            Vsako stranko obravnavamo posebej — eno naenkrat, do perfekcije.</p>
+          <ul class="about__list">
+            <li>Ena stranka naenkrat — vsa pozornost je vaša, brez čakanja.</li>
+            <li>Kvalitetne, obstojne barve.</li>
+            <li>Brezplačen ogled, brez obveznosti.</li>
+          </ul>
+          <a href="#kontakt" class="btn btn--solid magnetic" data-cursor="hover"><span>Spoznajmo se</span></a>
+        </div>
+        <div class="about__swatches reveal" aria-hidden="true">
+          <div class="swatch" style="--s:#ff5e7e"><span>Pomladna magenta</span></div>
+          <div class="swatch" style="--s:#ff9d5c"><span>Topla oranžna</span></div>
+          <div class="swatch" style="--s:#ffc24b"><span>Sončna rumena</span></div>
+          <div class="swatch" style="--s:#5c7cff"><span>Globoka modra</span></div>
+          <div class="swatch" style="--s:#9b5cff"><span>Slivova vijolična</span></div>
+          <div class="swatch" style="--s:#101014"><span>Nočno črnilo</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MNENJA -->
+    <section class="quotes">
+      <div class="sec-head">
+        <p class="sec-kicker reveal"><span>08</span> Mnenja</p>
+        <h2 class="sec-title reveal">Stranke, ki bi nas<br/>priporočile naprej.</h2>
+      </div>
+      <div class="quotes__row">
+        <blockquote class="quote reveal" data-cursor="hover">
+          <p>“Hitro, čisto in natančno. Stanovanje je videti kot novo, mi pa nismo premaknili niti prsta.”</p>
+          <footer><span class="quote__stars" aria-label="Ocena 5 od 5">★★★★★</span><b>Maja K.</b></footer>
+        </blockquote>
+        <blockquote class="quote reveal" data-cursor="hover">
+          <p>“Stene so po kitanju popolnoma ravne, barva enakomerna. Za sabo so vse pospravili in odpeljali staro pohištvo.”</p>
+          <footer><span class="quote__stars" aria-label="Ocena 5 od 5">★★★★★</span><b>Andrej P.</b></footer>
+        </blockquote>
+        <blockquote class="quote reveal" data-cursor="hover">
+          <p>“Profesionalni od prvega klica do zadnjega poteza čopiča. Točno to, kar obljubijo.”</p>
+          <footer><span class="quote__stars" aria-label="Ocena 5 od 5">★★★★★</span><b>Nina V.</b></footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- DA SE POČUTITE DOMA -->
+    <section class="feelgood">
+      <img class="feelgood__img" src="assets/family.jpg" alt="Družina uživa v na novo prebarvanem domu" loading="lazy" />
+      <div class="feelgood__veil"></div>
+      <div class="feelgood__content">
+        <p class="feelgood__eyebrow reveal">Najpomembnejše od vsega</p>
+        <h2 class="feelgood__title reveal">Da se počutite<br/><em>doma</em>.</h2>
+        <p class="feelgood__lead reveal">Stene niso le barva. So občutek, ki vas pozdravi vsako jutro
+          in pospremi vsak večer. Mi poskrbimo, da je ta občutek topel.</p>
+        <a href="#kontakt" class="btn btn--solid magnetic reveal" data-cursor="hover"><span>Ustvarimo vaš dom</span></a>
+      </div>
+    </section>
+
+    <!-- PREDNOSTI -->
+    <section class="perks">
+      <div class="perks__grid">
+        <div class="perk reveal"><b>1 po 1</b><span>eno stranko naenkrat — brez čakanja</span></div>
+        <div class="perk reveal"><b>7 let</b><span>izkušenj v stroki</span></div>
+        <div class="perk reveal"><b>Perfekcija</b><span>v vsakem detajlu in potezu</span></div>
+        <div class="perk reveal"><b>Brezplačen</b><span>ogled, brez obveznosti</span></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+      <div class="sec-head">
+        <p class="sec-kicker reveal"><span>09</span> Pogosta vprašanja</p>
+        <h2 class="sec-title reveal">Vse, kar vas zanima<br/>pred začetkom.</h2>
+      </div>
+      <div class="acc">
+        <details class="acc__item reveal" data-cursor="hover">
+          <summary>Kako hitro lahko pridete na ogled?<i></i></summary>
+          <div class="acc__body"><p>Po navadi se oglasimo v 24 urah, sam ogled pa uskladimo v nekaj dneh — odvisno od vaše lokacije in želenega termina. Ogled je vedno brezplačen.</p></div>
+        </details>
+        <details class="acc__item reveal" data-cursor="hover">
+          <summary>Ali pred pleskanjem zaščitite pohištvo in tla?<i></i></summary>
+          <div class="acc__body"><p>Seveda. Pred začetkom skrbno prekrijemo tla, pohištvo in vse površine. Po koncu vse pospravimo in počistimo — vaš dom prevzamete urejen, kot da nas ni bilo.</p></div>
+        </details>
+        <details class="acc__item reveal" data-cursor="hover">
+          <summary>Ali prej zakitate in pripravite stene?<i></i></summary>
+          <div class="acc__body"><p>Da. Pred barvanjem zapolnimo razpoke in luknje, stene zgladimo in pobrusimo. Šele ko je podlaga perfektna, gremo barvat — drugače se napake vidijo skozi barvo.</p></div>
+        </details>
+        <details class="acc__item reveal" data-cursor="hover">
+          <summary>Koliko stane barvanje?<i></i></summary>
+          <div class="acc__body"><p>Odvisno od vrste dela (dejanska površina = stene + strop): enojni premaz 4 €/m², dvojni premaz 5 €/m², kitanje + brušenje 6 €/m², celovito (2× premaz + kitanje + brušenje) 10 €/m². Po brezplačnem ogledu dobite jasno ponudbo brez skritih stroškov.</p></div>
+        </details>
+        <details class="acc__item reveal" data-cursor="hover">
+          <summary>Ali odpeljete tudi staro pohištvo in odpadke?<i></i></summary>
+          <div class="acc__body"><p>Da. Po dogovoru odpeljemo staro pohištvo in odpadke na deponijo, tako da vam ni treba skrbeti za odvoz — prostor prevzamete urejen in prazen.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section class="contact" id="kontakt">
+      <div class="contact__grid">
+        <div class="contact__intro reveal">
+          <p class="sec-kicker"><span>10</span> Kontakt</p>
+          <h2 class="contact__title">Pobeli me.<br/>Spremeni vse.</h2>
+          <p class="contact__p">Povejte nam o svojem prostoru. V 24 urah se oglasimo z brezplačno
+            oceno in okvirno ceno.</p>
+          <ul class="contact__info">
+            <li><span>Telefon</span><a href="tel:+38670577333" data-cursor="hover">Miha Pohar: 070 577 333</a><br><a href="tel:+38631544416" data-cursor="hover">Aljaž Skornšek: 031 544 416</a></li>
+            <li><span>E-pošta</span><a href="mailto:info@pobelime.si" data-cursor="hover">info@pobelime.si</a></li>
+            <li><span>Kje</span><a data-cursor="hover">Maribor &amp; okolica (Štajerska)</a></li>
+            <li><span>Instagram</span><a href="#" data-cursor="hover">@pobeli.me</a></li>
+          </ul>
+        </div>
+
+        <form class="form reveal" id="form" action="contact.php" method="post" enctype="multipart/form-data" novalidate>
+          <div class="field">
+            <input type="text" id="ime" name="ime" required placeholder=" " data-cursor="hover" />
+            <label for="ime">Ime in priimek</label>
+          </div>
+          <div class="field">
+            <input type="email" id="email" name="email" required placeholder=" " data-cursor="hover" />
+            <label for="email">E-pošta</label>
+          </div>
+          <div class="field">
+            <input type="tel" id="tel" name="tel" placeholder=" " data-cursor="hover" />
+            <label for="tel">Telefon (neobvezno)</label>
+          </div>
+          <div class="field">
+            <select id="tip" name="tip" data-cursor="hover" required>
+              <option value="" disabled selected></option>
+              <option>Barvanje sten</option>
+              <option>Kitanje &amp; priprava</option>
+              <option>Perfektne stene</option>
+              <option>Odvoz na deponijo</option>
+              <option>Drugo</option>
+            </select>
+            <label for="tip">Tip projekta</label>
+          </div>
+          <div class="field field--full">
+            <textarea id="sporocilo" name="sporocilo" rows="3" placeholder=" " data-cursor="hover"></textarea>
+            <label for="sporocilo">Povejte nam več o prostoru</label>
+          </div>
+          <div class="field field--full field--file">
+            <label for="slike">Fotografije sten</label>
+            <p>Dodajte do 8 fotografij sten ali prostorov. Tako vam lahko pripravimo natančnejšo prvo oceno.</p>
+            <input type="file" id="slike" name="slike[]" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple data-cursor="hover" aria-describedby="fileStatus fileRules" />
+            <span class="file__status" id="fileStatus">Izberite fotografije sten</span>
+            <small class="file__rules" id="fileRules">JPG, PNG, WEBP ali HEIC · največ 8 MB na fotografijo · skupaj največ 20 MB</small>
+            <div class="file__preview" id="filePreview" aria-live="polite"></div>
+          </div>
+          <button type="submit" class="btn btn--solid btn--block magnetic" data-cursor="hover">
+            <span>Pošlji povpraševanje</span>
+          </button>
+          <p class="form__note" id="formNote" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img class="footer__logo" src="assets/logo.png" alt="POBELI ME logotip" />
+        <p>Pleskarstvo z dušo. Vaš prostor, pobarvan v zgodbo — čisto, natančno in brez nereda.</p>
+        <a href="#kontakt" class="btn btn--solid magnetic" data-cursor="hover"><span>Začni projekt</span></a>
+      </div>
+      <nav class="footer__col">
+        <h4>Storitve</h4>
+        <a href="#storitve" data-cursor="hover">Barvanje sten</a>
+        <a href="#storitve" data-cursor="hover">Kitanje &amp; priprava</a>
+        <a href="#storitve" data-cursor="hover">Perfektne stene</a>
+        <a href="#storitve" data-cursor="hover">Odvoz na deponijo</a>
+      </nav>
+      <nav class="footer__col">
+        <h4>Povezave</h4>
+        <a href="#projekti" data-cursor="hover">Projekti</a>
+        <a href="#postopek" data-cursor="hover">Postopek</a>
+        <a href="#onas" data-cursor="hover">O nas</a>
+        <a href="#faq" data-cursor="hover">Pogosta vprašanja</a>
+      </nav>
+      <div class="footer__col">
+        <h4>Kontakt</h4>
+        <a href="tel:+38670577333" data-cursor="hover">Miha Pohar: 070 577 333</a><br><a href="tel:+38631544416" data-cursor="hover">Aljaž Skornšek: 031 544 416</a>
+        <a href="mailto:info@pobelime.si" data-cursor="hover">info@pobelime.si</a>
+        <a href="#" data-cursor="hover">@pobeli.me</a>
+        <a data-cursor="hover">Maribor, Slovenija</a>
+      </div>
+    </div>
+    <p class="footer__tag">Barvamo · kitamo · počistimo · odpeljemo staro.</p>
+    <div class="footer__big">POBELI ME</div>
+    <div class="footer__row">
+      <p>© <span id="year"></span> Pobeli Me</p>
+      <a href="#vrh" data-cursor="hover">Nazaj na vrh ↑</a>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button class="totop" id="totop" aria-label="Nazaj na vrh" data-cursor="hover">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a1812" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="V FORMI" />
+  <title>V FORMI</title>
+  <meta name="description" content="V FORMI — slovenska fitnes aplikacija: kalorije, blog, treningi po meri, recepti in napredek." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- SPLASH -->
+  <div class="splash" id="splash">
+    <div class="splash__logo">
+      <svg viewBox="0 0 120 120" class="splash__mark">
+        <path class="leaf" d="M60 18 C42 40 40 70 60 100 C46 78 50 46 60 18 Z"/>
+        <path class="check" d="M40 30 L60 96 L86 26"/>
+        <circle class="head" cx="60" cy="20" r="9"/>
+      </svg>
+      <div class="splash__name"><span>V</span> FORMI</div>
+      <div class="splash__tag">Postani najboljša verzija sebe</div>
+      <div class="splash__bar"><i></i></div>
+    </div>
+  </div>
+
+  <!-- ONBOARDING VPRAŠALNIK -->
+  <div class="wizard" id="wizard">
+    <div class="wizard__inner">
+      <div class="wizard__bar"><i id="wizBar"></i></div>
+      <form id="wizForm">
+        <div class="wstep is-active">
+          <h2>Dobrodošel v V FORMI 🌿</h2><p class="wsub">Vzemi 60 sekund — sestavili ti bomo načrt po meri. Najprej, kako ti je ime?</p>
+          <input type="text" name="ime" placeholder="Tvoje ime" required />
+        </div>
+        <div class="wstep">
+          <h2>Poveži telefon</h2><p class="wsub">Da samodejno štejemo tvoje korake in porabljene kalorije — tako veš, koliko lahko poješ. Lahko preskočiš in dodaš kasneje.</p>
+          <div class="optcol" data-field="sync">
+            <button type="button" data-val="apple">🍎 Poveži Apple Health</button>
+            <button type="button" data-val="google">🟢 Poveži Google Fit</button>
+          </div>
+          <button type="button" class="btn btn--ghost block" data-skip="sync">Preskoči za zdaj</button>
+        </div>
+        <div class="wstep">
+          <h2>Tvoj spol</h2><p class="wsub">Za natančen izračun tvojih dnevnih potreb po energiji.</p>
+          <div class="optbig" data-field="spol">
+            <button type="button" data-val="moski">♂️ Moški</button>
+            <button type="button" data-val="zenska">♀️ Ženska</button>
+          </div>
+        </div>
+        <div class="wstep">
+          <h2>Koliko si star/a?</h2>
+          <input type="number" name="starost" min="14" max="100" placeholder="Starost (let)" required />
+        </div>
+        <div class="wstep">
+          <h2>Tvoja višina in teža</h2>
+          <input type="number" name="visina" min="120" max="230" placeholder="Višina (cm)" required />
+          <input type="number" name="teza" min="35" max="250" step="0.1" placeholder="Trenutna teža (kg)" required />
+        </div>
+        <div class="wstep">
+          <h2>Kaj želiš doseči?</h2>
+          <div class="optcol" data-field="cilj">
+            <button type="button" data-val="hujsanje">🔥 Izgubiti kilograme</button>
+            <button type="button" data-val="misice">💪 Zgraditi mišice</button>
+            <button type="button" data-val="vzdrzevanje">🌿 Živeti zdravo & uravnoteženo</button>
+          </div>
+        </div>
+        <div class="wstep" data-only="hujsanje">
+          <h2>Koliko kg želiš izgubiti?</h2><p class="wsub">Povemo ti, kako velik deficit potrebuješ.</p>
+          <div class="optcol" data-field="kgLose">
+            <button type="button" data-val="3">2–4 kg</button>
+            <button type="button" data-val="6">5–8 kg</button>
+            <button type="button" data-val="10">9–12 kg</button>
+            <button type="button" data-val="16">13+ kg</button>
+          </div>
+        </div>
+        <div class="wstep" data-only="misice">
+          <h2>Mišice — kako?</h2>
+          <div class="optcol" data-field="podcilj">
+            <button type="button" data-val="masa">📈 Dodajanje mase (lean bulk)</button>
+            <button type="button" data-val="oblikovanje">✨ Samo oblikovanje (recomp)</button>
+          </div>
+        </div>
+        <div class="wstep">
+          <h2>Poznaš svoj % telesne maščobe?</h2><p class="wsub">Neobvezno — pomaga pri natančnejšem načrtu.</p>
+          <input type="number" name="bf" min="3" max="60" placeholder="npr. 22 (%)" />
+          <button type="button" class="btn btn--ghost block" data-skip="bf">Ne vem — preskoči</button>
+        </div>
+        <div class="wstep" data-only="hujsanje,misice">
+          <h2>V kolikšnem času?</h2><p class="wsub">Realen tempo te ohrani motiviranega.</p>
+          <div class="optcol" data-field="okvir">
+            <button type="button" data-val="8">V 8 tednih (poletna preobrazba)</button>
+            <button type="button" data-val="12">V 3 mesecih</button>
+            <button type="button" data-val="24">V 6 mesecih</button>
+            <button type="button" data-val="52">Brez naglice (1 leto)</button>
+          </div>
+        </div>
+        <div class="wstep">
+          <h2>Kako pogosto se gibaš?</h2>
+          <div class="optcol" data-field="trening">
+            <button type="button" data-val="1.2">Sedeče, brez vadbe</button>
+            <button type="button" data-val="1.375">1–2× na teden</button>
+            <button type="button" data-val="1.55">3–4× na teden</button>
+            <button type="button" data-val="1.725">5–6× na teden</button>
+            <button type="button" data-val="1.9">Vsak dan / fizično delo</button>
+          </div>
+        </div>
+        <div class="wstep">
+          <h2>Tvoj življenjski slog</h2><p class="wsub">Spanec je temelj regeneracije in rezultatov.</p>
+          <div class="optcol" data-field="slog">
+            <button type="button" data-val="slab">😴 Spim manj kot 6 ur</button>
+            <button type="button" data-val="ok">🌙 6–7 ur</button>
+            <button type="button" data-val="dober">✅ 7–8 ur</button>
+            <button type="button" data-val="odlicen">⭐ Več kot 8 ur</button>
+          </div>
+        </div>
+        <div class="wstep">
+          <h2>Tvoja izkušenost z vadbo</h2>
+          <div class="optcol" data-field="nivo">
+            <button type="button" data-val="zacetnik">🌱 Začetnik</button>
+            <button type="button" data-val="izkusen">⚡ Izkušen</button>
+            <button type="button" data-val="profesionalec">🏆 Profesionalec</button>
+          </div>
+        </div>
+      </form>
+      <div class="wizard__nav">
+        <button class="btn btn--ghost" id="wizBack">Nazaj</button>
+        <button class="btn btn--solid" id="wizNext">Naprej</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div class="phone" id="phone">
+    <header class="hdr">
+      <button class="hdr__avatar" id="openProfile" aria-label="Profil">👤</button>
+      <div class="hdr__brand"><span>V</span> FORMI</div>
+      <button class="hdr__bell" aria-label="Obvestila">🔔</button>
+    </header>
+
+    <main class="screen" id="screen">
+      <!-- DOMOV -->
+      <section class="page is-active" id="page-dashboard">
+        <p class="greet" id="greet"></p>
+        <div id="trialBanner"></div>
+        <div class="daynav"><button id="dayPrev">‹</button><b id="dayLabel">Danes</b><button id="dayNext">›</button></div>
+
+        <div class="card ringcard">
+          <h3 class="ringcard__title">Kalorije</h3>
+          <p class="ringcard__sub">Ostane = Cilj − Hrana + Vadba</p>
+          <div class="ringwrap">
+            <svg viewBox="0 0 200 200" class="ring"><circle class="ring__bg" cx="100" cy="100" r="86"/><circle class="ring__fg" id="ringFg" cx="100" cy="100" r="86"/></svg>
+            <div class="ring__center"><b id="ringRemain">0</b><span>Ostane</span></div>
+          </div>
+          <div class="ringstats">
+            <div><span>🏁 Cilj</span><b id="statGoal">0</b></div>
+            <div><span>🍴 Hrana</span><b id="statFood">0</b></div>
+            <div><span>🔥 Vadba</span><b id="statEx">0</b></div>
+          </div>
+          <div class="macrobars" id="macroBars"></div>
+        </div>
+
+        <div id="planCard"></div>
+
+        <div class="card2row">
+          <div class="card mini2"><h4>👟 Koraki</h4><b id="dashSteps">0</b><div class="progbar"><i id="stepsBar"></i></div><span class="muted">Cilj: 10.000</span></div>
+          <div class="card mini2"><h4>🔥 Vadba</h4><b id="dashExCal">0 kcal</b><span class="muted" id="dashExMin">00:00 h</span><button class="addmini" id="addExercise">+ dodaj</button></div>
+        </div>
+
+        <div class="diary card" id="diaryCard">
+          <div class="cardhead"><h4>📖 Dnevnik hrane</h4><span class="muted"><span id="diaryEaten">0</span>/<span id="diaryGoal">0</span> kcal</span></div>
+          <div id="meals"></div>
+          <button class="btn btn--ghost block" id="photoEstBtn">📷 Oceni kalorije iz slike</button>
+        </div>
+
+        <div id="recMeals"></div>
+
+        <button class="rowlink" id="openProfile2">👤 Moj profil & cilj <span>›</span></button>
+        <button class="rowlink" data-go="story">📖 Naša zgodba & misija <span>›</span></button>
+        <button class="rowlink" data-go="sync">🍎 Poveži zdravstvene aplikacije <span>›</span></button>
+        <button class="rowlink" data-go="skupnost">💬 Skupnost <span>›</span></button>
+        <div class="card promo" data-go="pro"><div><b>✓ Vse storitve vključene</b><p class="muted">Polni dostop — brez plačila</p></div><span class="chevr">›</span></div>
+      </section>
+
+      <!-- BLOG -->
+      <section class="page" id="page-blog">
+        <h2 class="ph">📰 Blog</h2>
+        <p class="muted" style="margin-bottom:14px">Znanost, prevedena v nasvete, ki delujejo.</p>
+        <div id="blogList"></div>
+      </section>
+      <section class="page subpage" id="page-blogpost">
+        <button class="back" data-back="blog">‹ Nazaj na blog</button>
+        <div id="blogPost"></div>
+      </section>
+
+      <!-- TRENINGI -->
+      <section class="page" id="page-treningi">
+        <h2 class="ph">🏋️ Treningi</h2>
+        <div class="card">
+          <h4>Glavni cilj treninga</h4>
+          <p class="muted small">Izberi, kaj želiš doseči — program prilagodimo zate.</p>
+          <div class="chips" id="goalPick"></div>
+          <p class="muted small" id="goalNote"></p>
+        </div>
+        <div class="card">
+          <h4>Tvoj nivo</h4>
+          <div class="chips" id="levelPick"></div>
+          <p class="muted small" id="levelNote"></p>
+        </div>
+        <div class="card">
+          <div class="cardhead"><h4>📋 Tvoj tedenski program</h4></div>
+          <p class="muted small" id="progGoalNote"></p>
+          <div id="programArea"></div>
+        </div>
+        <div class="card">
+          <div class="cardhead"><h4>📚 Knjižnica vaj</h4></div>
+          <div class="chips" id="exFilter"></div>
+          <div id="exLibrary"></div>
+        </div>
+      </section>
+
+      <!-- RECEPTI -->
+      <section class="page" id="page-recepti">
+        <h2 class="ph">🥗 Recepti</h2>
+        <div class="chips" id="recFilter"></div>
+        <p class="reccount muted" id="recCount"></p>
+        <div class="recgrid" id="recGrid"></div>
+      </section>
+      <section class="page subpage" id="page-recipe">
+        <button class="back" data-back="recepti">‹ Nazaj na recepte</button>
+        <div id="recipeDetail"></div>
+      </section>
+
+      <!-- PROGRES -->
+      <section class="page" id="page-progres">
+        <h2 class="ph">📊 Napredek</h2>
+        <div class="card">
+          <div class="cardhead"><h4>⚖️ Teža</h4><button class="link" id="quickWeigh">+ vnos</button></div>
+          <canvas id="weightChart2" height="140"></canvas>
+          <p class="muted" id="weightTrend2"></p>
+        </div>
+        <div class="card">
+          <h4>🧍 Telesna maščoba — kje si in kam greš</h4>
+          <h5 class="lbl">Trenutno</h5><div class="bodygrid" id="bodyCurrent"></div>
+          <h5 class="lbl">Cilj</h5><div class="bodygrid" id="bodyTarget"></div>
+          <div id="bodySummary" class="bodysum"></div>
+        </div>
+        <div class="card">
+          <div class="cardhead"><h4>🏋️ Napredek vaj</h4></div>
+          <div id="exProgress"></div>
+        </div>
+        <div class="card">
+          <h4>🙂 Kako si danes?</h4>
+          <label class="slider">Počutje <span id="moodVal">5</span>/10<input type="range" id="mood" min="1" max="10" value="5" /></label>
+          <label class="slider">Energija <span id="energyVal">5</span>/10<input type="range" id="energy" min="1" max="10" value="5" /></label>
+          <label class="slider">Spanec <span id="sleepVal">5</span>/10<input type="range" id="sleep" min="1" max="10" value="5" /></label>
+          <h5 class="lbl">Trening je zame…</h5>
+          <div class="chips" id="trainFeel">
+            <button class="chip" data-tf="lahek">😎 Prelahek</button>
+            <button class="chip" data-tf="ravno">👌 Ravno prav</button>
+            <button class="chip" data-tf="tezek">🥵 Pretežek</button>
+          </div>
+          <h5 class="lbl">Ali zmoreš vzdrževati?</h5>
+          <div class="chips" id="sustain">
+            <button class="chip" data-su="da">✅ Da, gre</button>
+            <button class="chip" data-su="tezko">😬 Težko</button>
+            <button class="chip" data-su="ne">❌ Ne zmorem</button>
+          </div>
+          <button class="btn btn--solid block" id="saveProgress">Shrani počutje</button>
+          <div id="progStatus" class="muted"></div>
+        </div>
+        <div class="card wa" id="waCard">
+          <h4>💬 Klepet z ekspertom (WhatsApp)</h4>
+          <div id="waInner"></div>
+        </div>
+      </section>
+
+      <!-- SUBPAGES -->
+      <section class="page subpage" id="page-profil">
+        <button class="back" data-back="dashboard">‹ Nazaj</button>
+        <h2 class="ph">Moj profil</h2>
+        <form id="profileForm" class="card form-grid">
+          <label>Ime<input type="text" name="ime" /></label>
+          <label>Spol<select name="spol"><option value="moski">Moški</option><option value="zenska">Ženska</option></select></label>
+          <label>Starost<input type="number" name="starost" min="14" max="100" /></label>
+          <label>Višina (cm)<input type="number" name="visina" min="120" max="230" /></label>
+          <label>Teža (kg)<input type="number" name="teza" min="35" max="250" step="0.1" /></label>
+          <label>Trening / teden<select name="trening"><option value="1.2">Sedeče</option><option value="1.375">1–2×</option><option value="1.55">3–4×</option><option value="1.725">5–6×</option><option value="1.9">Vsak dan</option></select></label>
+          <label>Cilj<select name="cilj"><option value="hujsanje">Hujšanje</option><option value="vzdrzevanje">Vzdrževanje</option><option value="misice">Mišice</option><option value="bulk">Bulk</option></select></label>
+          <label>Nivo<select name="nivo"><option value="zacetnik">Začetnik</option><option value="izkusen">Izkušen</option><option value="profesionalec">Profesionalec</option></select></label>
+          <button type="submit" class="btn btn--solid form-grid__full">Shrani & izračunaj</button>
+        </form>
+        <div class="card result hidden" id="profileResult">
+          <div class="bigstat"><b id="tdeeKcal">—</b><span>kcal / dan (cilj)</span></div>
+          <div class="macros"><div class="macro"><b id="mP">—</b><span>Beljakovine</span></div><div class="macro"><b id="mC">—</b><span>OH</span></div><div class="macro"><b id="mF">—</b><span>Maščobe</span></div></div>
+          <p class="muted" id="bmiNote"></p>
+        </div>
+        <button class="btn btn--ghost block" id="restartWizard">↺ Začni vprašalnik znova</button>
+      </section>
+
+      <section class="page subpage" id="page-sync">
+        <button class="back" data-back="dashboard">‹ Nazaj</button>
+        <h2 class="ph">Zdravstvene aplikacije</h2>
+        <div class="card">
+          <p class="muted">Uvozi korake in vadbo. Več gibanja = več kalorij na voljo.</p>
+          <button class="btn btn--ghost block" id="syncApple">🍎 Poveži Apple Health</button>
+          <button class="btn btn--ghost block" id="syncGoogle">🟢 Poveži Google Fit</button>
+          <div class="form-grid" style="margin-top:12px">
+            <label>Koraki danes<input type="number" id="stepsToday" min="0" value="0" /></label>
+            <label>Minute vadbe<input type="number" id="sportToday" min="0" value="0" /></label>
+          </div>
+        </div>
+      </section>
+
+      <section class="page subpage" id="page-skupnost">
+        <button class="back" data-back="dashboard">‹ Nazaj</button>
+        <h2 class="ph">Skupnost</h2>
+        <div class="card"><input type="text" id="commentName" placeholder="Tvoje ime" /><textarea id="commentText" rows="3" placeholder="Napiši komentar..."></textarea><button class="btn btn--solid" id="addComment">Objavi</button></div>
+        <div id="comments"></div>
+      </section>
+
+      <section class="page subpage" id="page-pro">
+        <button class="back" data-back="dashboard">‹ Nazaj</button>
+        <p class="kicker">Članstvo</p>
+        <h2 class="ph serif">Vlaganje v edino, česar ne moreš kupiti</h2>
+        <div class="plans" data-plans></div>
+        <p class="muted demo-note">Demo: plačilo je simulirano. Za pravo plačilo se poveže Stripe.</p>
+      </section>
+
+      <!-- PAYWALL (po vprašalniku) -->
+      <section class="page subpage" id="page-paywall">
+        <div class="paywall__top">
+          <p class="kicker">Tvoj načrt je pripravljen ✨</p>
+          <h2 class="ph serif" id="paywallHi">Izberi svojo pot, <span>do najboljše verzije sebe</span></h2>
+        </div>
+        <div class="plans" data-plans></div>
+        <button class="btn btn--solid block" id="continueFree">🎁 Začni 3-dnevni brezplačni preizkus</button>
+        <p class="muted demo-note">Vse odklenjeno 3 dni. Brez obveznosti — prekličeš kadarkoli.</p>
+        <p class="muted demo-note">Prekličeš lahko kadarkoli. Plačilo demo (Stripe v produkciji).</p>
+      </section>
+
+      <!-- NAŠA ZGODBA -->
+      <section class="page subpage" id="page-story">
+        <button class="back" data-back="dashboard">‹ Nazaj</button>
+        <div id="storyBody"></div>
+      </section>
+    </main>
+
+    <!-- BOTTOM NAV -->
+    <nav class="botnav">
+      <button class="navbtn is-active" data-nav="dashboard"><span class="ico">🏠</span>Domov</button>
+      <button class="navbtn" data-nav="blog"><span class="ico">📰</span>Blog</button>
+      <button class="navbtn" data-nav="treningi"><span class="ico">🏋️</span>Trening</button>
+      <button class="navbtn" data-nav="recepti"><span class="ico">🥗</span>Recepti</button>
+      <button class="navbtn" data-nav="progres"><span class="ico">📊</span>Progres</button>
+    </nav>
+    <button class="fab" id="fabAdd" aria-label="Dodaj hrano">+</button>
+  </div>
+
+  <!-- SHEET: dodaj hrano -->
+  <div class="sheet" id="sheet"><div class="sheet__panel">
+    <div class="sheet__grab"></div>
+    <div class="sheet__head"><h3>Dodaj hrano</h3><button class="sheet__close" id="sheetClose">✕</button></div>
+    <div class="mealpick chips" id="mealPick"></div>
+    <div class="searchrow"><input type="text" id="foodSearch" placeholder="Išči hrano..." /><button class="scanbtn" id="openScan" aria-label="Skeniraj">📷</button></div>
+    <div class="foodresults" id="foodResults"></div>
+  </div></div>
+
+  <!-- PORTION -->
+  <div class="modal" id="portionModal"><div class="modal__box">
+    <h3 id="portionName">—</h3><p class="muted" id="portionPer"></p>
+    <label>Količina (g/ml)<input type="number" id="portionGrams" value="100" min="1" /></label>
+    <div class="portioncalc" id="portionCalc"></div>
+    <div class="modal__actions"><button class="btn btn--ghost" id="portionCancel">Prekliči</button><button class="btn btn--solid" id="portionAdd">Dodaj</button></div>
+  </div></div>
+
+  <!-- PHOTO ESTIMATE -->
+  <div class="modal" id="photoModal"><div class="modal__box">
+    <h3>📷 Oceni kalorije iz slike</h3>
+    <input type="file" id="foodPhoto" accept="image/*" capture="environment" />
+    <img id="photoPreview" class="photoprev hidden" />
+    <div id="photoStep2" class="hidden">
+      <label class="lbl">Kakšna jed je?</label>
+      <select id="estType">
+        <option value="solata">Solata / zelenjava</option>
+        <option value="zajtrk">Zajtrk (kosmiči/jajca/kruh)</option>
+        <option value="kroznik">Krožnik: meso + priloga</option>
+        <option value="testenine">Testenine / rižota</option>
+        <option value="hitra">Hitra hrana (burger/pica/burek)</option>
+        <option value="juha">Juha</option>
+        <option value="sladica">Sladica / pecivo</option>
+        <option value="sadje">Sadje</option>
+      </select>
+      <label class="lbl">Velikost porcije</label>
+      <div class="chips" id="estSize"><button class="chip is-sel" data-s="0.7">Majhna</button><button class="chip" data-s="1">Srednja</button><button class="chip" data-s="1.5">Velika</button></div>
+      <div class="portioncalc" id="estResult"></div>
+      <p class="muted small">Ocena temelji na vrsti jedi in porciji. Za prepoznavo s fotografije se kasneje poveže AI-model.</p>
+    </div>
+    <div class="modal__actions"><button class="btn btn--ghost" id="photoCancel">Zapri</button><button class="btn btn--solid hidden" id="photoAdd">Dodaj v dnevnik</button></div>
+  </div></div>
+
+  <!-- SCANNER -->
+  <div class="scanner" id="scanner">
+    <div class="scanner__head"><b>Skeniraj črtno kodo</b><button id="scanClose">✕</button></div>
+    <video id="scanVideo" playsinline></video>
+    <div class="scanner__frame"></div>
+    <div class="scanner__status" id="scanStatus">Usmeri kamero v črtno kodo…</div>
+    <div class="scanner__manual"><input type="text" id="manualBarcode" placeholder="ali vnesi EAN ročno" inputmode="numeric" /><button class="btn btn--solid" id="manualLookup">Poišči</button></div>
+  </div>
+
+  <!-- EXERCISE (kardio/vadba kcal) -->
+  <div class="modal" id="exModal"><div class="modal__box">
+    <h3>Dodaj vadbo</h3>
+    <label>Aktivnost<select id="exType"><option value="6">Hoja</option><option value="10">Tek</option><option value="8">Kolesarjenje</option><option value="7">Trening v fitnesu</option><option value="9">Plavanje</option><option value="11">HIIT</option></select></label>
+    <label>Minute<input type="number" id="exMin" value="30" min="1" /></label>
+    <div class="modal__actions"><button class="btn btn--ghost" id="exCancel">Prekliči</button><button class="btn btn--solid" id="exSave">Dodaj</button></div>
+  </div></div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="foods.js"></script>
+  <script src="recipes.js"></script>
+  <script src="exercises.js"></script>
+  <script src="blog.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
