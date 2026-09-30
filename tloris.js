@@ -471,15 +471,15 @@
   const list = $('#planRooms'), editor = $('#planEditor'), scaleNote = $('#planScale'), hint = $('#planHint');
   const step = () => {
     if (!state.rooms.length) return 1;
-    if (!anyMarked()) return 2;
-    if (!state.calibrated) return 3;
+    if (!state.calibrated) return 2;
+    if (!anyMarked()) return 3;
     return 4;
   };
   const HINTS = {
     1: '<b>Korak 1 ·</b> S prstom narišite obris prostora — ali samo potegnite diagonalo za pravokoten prostor. Pri sosednjem prostoru zadošča, da narišete samo manjkajoče stene — od zidu do zidu.',
-    2: '<b>Korak 2 ·</b> Izberite <b>Vrata</b> ali <b>Okno</b> in tapnite zid, kjer so. Ponoven tap jih odstrani.',
-    3: '<b>Korak 3 ·</b> Izberite <b>Mere</b>, tapnite en zid in vpišite njegovo pravo dolžino. Vse ostale mere se preračunajo.',
-    4: '<b>Končano ·</b> Preverite še višino stropa desno. Tloris lahko pošljete skupaj s povpraševanjem.'
+    2: '<b>Korak 2 ·</b> Izberite <b>Mere</b>, tapnite en zid in vpišite njegovo pravo dolžino. Vse ostale mere se preračunajo.',
+    3: '<b>Korak 3 ·</b> Izberite <b>Vrata</b> ali <b>Okno</b> in tapnite zid, kjer so. Ponoven tap jih odstrani.',
+    4: '<b>Korak 4 ·</b> Vpišite višino stropa — do centimetra, po želji tudi za posamezen prostor. Nato tloris pošljite s povpraševanjem.'
   };
   let flash = null;
   const renderPanel = () => {

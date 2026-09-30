@@ -174,7 +174,7 @@
         <p class="sec-kicker reveal">Natančen izračun</p>
         <h2 class="sec-title reveal">Narišite tloris.<br/>Mi ga zravnamo.</h2>
         <p class="plan__lead reveal">S prstom ali miško narišite obris vsakega prostora. Črte se same poravnajo v ravne stene,
-          na zidovih se izpišejo mere, v prostoru pa kvadratura. Vpišite eno pravo mero in višino stropa — dobite natančno
+          na zidovih se izpišejo mere, v prostoru pa kvadratura. Vpišite eno pravo mero, označite vrata in okna ter višino stropa — dobite natančno
           površino in ceno, tloris pa nam lahko pošljete skupaj s povpraševanjem.</p>
       </div>
 
@@ -182,19 +182,19 @@
         <div class="plan__board">
           <ol class="plan__steps" aria-label="Koraki">
             <li data-step="1"><span>1</span>Prostori</li>
-            <li data-step="2"><span>2</span>Vrata in okna</li>
-            <li data-step="3"><span>3</span>Ena mera</li>
+            <li data-step="2"><span>2</span>Mere</li>
+            <li data-step="3"><span>3</span>Vrata in okna</li>
             <li data-step="4"><span>4</span>Višina</li>
           </ol>
           <div class="plan__tools" role="toolbar" aria-label="Orodja">
             <button type="button" class="plan__tool is-active" data-mode="draw" aria-pressed="true" data-cursor="hover">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c3-6 6 2 9-4s5-8 9-6"/></svg>Nariši</button>
+            <button type="button" class="plan__tool" data-mode="edit" aria-pressed="false" data-cursor="hover">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l4 4 14-14-4-4zM14 6l4 4"/></svg>Mere</button>
             <button type="button" class="plan__tool" data-mode="door" aria-pressed="false" data-cursor="hover">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M6 20V6M6 6a12 12 0 0 1 12 12"/></svg>Vrata</button>
             <button type="button" class="plan__tool" data-mode="window" aria-pressed="false" data-cursor="hover">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h18M3 14h18M3 7v10M21 7v10"/></svg>Okno</button>
-            <button type="button" class="plan__tool" data-mode="edit" aria-pressed="false" data-cursor="hover">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l4 4 14-14-4-4zM14 6l4 4"/></svg>Mere</button>
           </div>
           <p class="plan__hint" id="planHint" role="status"></p>
           <div class="plan__canvas">
