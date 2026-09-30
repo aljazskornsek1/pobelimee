@@ -348,14 +348,25 @@
     }));
     $('#roomsMinus')?.addEventListener('click', () => { rooms = Math.max(1, rooms - 1); render(); });
     $('#roomsPlus')?.addEventListener('click', () => { rooms = Math.min(12, rooms + 1); render(); });
-    $$('.calc__seg button').forEach(b => b.addEventListener('click', () => {
-      height = +b.dataset.h;
-      $$('.calc__seg button').forEach(x => x.classList.toggle('is-active', x === b));
+    // višina stropa: vpis do centimetra ali hitra izbira
+    const qH = $('#qH'), qBtns = $$('#kalkulator .calc__qh button');
+    const setH = (h, fromInput) => {
+      if (!(h >= 2 && h <= 6)) return false;
+      height = Math.round(h * 100) / 100;
+      qBtns.forEach(x => x.classList.toggle('is-active', Math.abs(+x.dataset.h - height) < 0.001));
+      if (qH && !fromInput) qH.value = height.toFixed(2);
       render();
-    }));
-    $$('.calc__opt').forEach(o => o.addEventListener('click', () => {
+      return true;
+    };
+    qBtns.forEach(b => b.addEventListener('click', () => setH(+b.dataset.h)));
+    if (qH) {
+      const val = () => parseFloat(qH.value.replace(',', '.'));
+      qH.addEventListener('input', () => { qH.classList.toggle('is-bad', !setH(val(), true) && qH.value.trim() !== ''); });
+      qH.addEventListener('change', () => { if (setH(val())) qH.classList.remove('is-bad'); else qH.value = height.toFixed(2); });
+    }
+    $$('#kalkulator .calc__opt').forEach(o => o.addEventListener('click', () => {
       rate = +o.dataset.rate;
-      $$('.calc__opt').forEach(b => b.classList.toggle('is-active', b === o));
+      $$('#kalkulator .calc__opt').forEach(b => b.classList.toggle('is-active', b === o));
       render();
     }));
     render();

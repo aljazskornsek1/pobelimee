@@ -118,8 +118,11 @@
             <p class="calc__small">Sobe, dnevna, kuhinja, hodnik. Kopalnice in WC-ja s ploščicami ne štejte.</p>
 
             <div class="calc__setrow">
-              <span class="calc__optlabel" id="hLabel">Višina stropa</span>
-              <div class="calc__seg" role="group" aria-labelledby="hLabel">
+              <label class="calc__optlabel" id="hLabel" for="qH">Višina stropa</label>
+              <div class="plan__hin"><input type="text" inputmode="decimal" id="qH" value="2.60" aria-describedby="hLabel" /><span>m</span></div>
+            </div>
+            <div class="calc__setrow">
+              <div class="calc__seg calc__qh" role="group" aria-label="Hitra izbira višine">
                 <button type="button" data-h="2.5">2,5 m</button>
                 <button type="button" data-h="2.6" class="is-active">2,6 m</button>
                 <button type="button" data-h="2.8">2,8 m</button>
@@ -241,6 +244,14 @@
                 <span>m²</span>
                 <button type="button" id="edAreaSet" class="plan__apply">Nastavi</button>
               </div>
+              <span class="calc__optlabel" id="edHLbl">Višina stropa v tem prostoru</span>
+              <div class="plan__inrow">
+                <label class="sr" for="edH">Višina stropa v tem prostoru v metrih</label>
+                <input type="text" inputmode="decimal" id="edH" aria-describedby="edHLbl" />
+                <span>m</span>
+                <button type="button" id="edHSet" class="plan__apply">Nastavi</button>
+              </div>
+              <p class="plan__small" id="edHNote">Prazno = enaka višina kot drugje.</p>
               <button type="button" id="edDelete" class="plan__link plan__link--del">Izbriši prostor</button>
             </div>
             <div id="edOpen" hidden>
@@ -256,7 +267,7 @@
           <ul class="plan__list" id="planRooms"></ul>
 
           <div class="calc__setrow plan__hrow">
-            <label class="calc__optlabel" for="planH">Višina stropa</label>
+            <label class="calc__optlabel" for="planH">Višina stropa · vsi prostori</label>
             <div class="plan__hin"><input type="text" inputmode="decimal" id="planH" value="2.60" /><span>m</span></div>
           </div>
           <div class="calc__seg plan__h" role="group" aria-label="Hitra izbira višine">

@@ -783,3 +783,7 @@ body.lock .nav,.nav.open-burger{background:transparent!important;border-bottom-c
 .plan__hint{display:block}
 .hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
 .form__privacy{grid-column:1/-1;margin:4px 0 0;font-size:12.5px;line-height:1.5;color:rgba(246,243,238,.5)}
+/* višina do centimetra */
+.plan__hin input.is-bad,.plan__inrow input.is-bad{border-color:#ff5e7e}
+.plan__small{margin:-4px 0 0;font-size:12.5px;color:rgba(246,243,238,.55)}
+.calc__qh{margin-top:-6px}

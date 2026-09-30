@@ -148,13 +148,61 @@
 
   /* ---------- PORAVNAVA OBRISA ---------- */
   // prostoročni obris → premice z zaokroženo smerjo (0°/90°, izjemoma 45°)
+  const lineOf = s => {
+    const rad = s.key * Math.PI / 180;
+    return { key: s.key, p: { x: s.mx / s.len, y: s.my / s.len }, u: { x: Math.cos(rad), y: Math.sin(rad) } };
+  };
+  const angDiff = (k1, k2) => { const d = Math.abs(k1 - k2) % 180; return Math.min(d, 180 - d); };
+  // obstoječi zid ob koncu odprte poteze, ki ni vzporeden z zadnjim narisanim odsekom
+  const closingWall = (p, key, tol) => {
+    let best = null;
+    state.rooms.forEach(r => walls(r).forEach(({ a, b }) => {
+      const s = segProj(p, a, b);
+      if (s.d > tol) return;
+      const k = ((Math.round(Math.atan2(b.y - a.y, b.x - a.x) * 1800 / Math.PI) / 10) % 180 + 180) % 180;
+      if (angDiff(k, key) < 30) return;
+      if (!best || s.d < best.d) {
+        const L = dist(a, b) || 1;
+        best = { d: s.d, q: s.q, line: { key: k, p: { x: a.x, y: a.y }, u: { x: (b.x - a.x) / L, y: (b.y - a.y) / L } } };
+      }
+    }));
+    return best;
+  };
   const toLines = raw => {
     const xs = raw.map(p => p.x), ys = raw.map(p => p.y);
     const diag = Math.hypot(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
     if (diag < 60) return null;
+    const bbox = { x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) };
     let pts = rdp(raw, Math.max(10, diag * 0.045));
-    if (dist(pts[0], pts[pts.length - 1]) < diag * 0.25) pts[pts.length - 1] = { ...pts[0] };
+    const open = dist(pts[0], pts[pts.length - 1]) >= diag * 0.25;
+    // odprta poteza, ki se začne in konča ob obstoječih zidovih: manjkajoče stene dopolnimo z njimi
+    if (open && state.rooms.length) {
+      const o = segsOf(pts, diag, false);
+      if (o.length >= 2) {
+        const tol = 45 * px();
+        const cS = closingWall(pts[0], o[0].key, tol), cE = closingWall(pts[pts.length - 1], o[o.length - 1].key, tol);
+        if (cS && cE) {
+          const lines = o.map(lineOf);
+          const sameLine = angDiff(cS.line.key, cE.line.key) < 1 &&
+            Math.abs((cE.q.x - cS.line.p.x) * cS.line.u.y - (cE.q.y - cS.line.p.y) * cS.line.u.x) < 3;
+          const parallel = angDiff(cS.line.key, cE.line.key) < 1;
+          if (sameLine || !parallel) {
+            lines.push(cE.line);
+            if (!sameLine) lines.push(cS.line);
+            [cS.q, cE.q].forEach(q => { bbox.x0 = Math.min(bbox.x0, q.x); bbox.x1 = Math.max(bbox.x1, q.x); bbox.y0 = Math.min(bbox.y0, q.y); bbox.y1 = Math.max(bbox.y1, q.y); });
+            if (lines.length >= 3) return { diag, bbox, lines, snapKeep: lines.length - o.length };
+          }
+        }
+      }
+    }
+    if (!open) pts[pts.length - 1] = { ...pts[0] };
     else pts.push({ ...pts[0] });
+    const merged = segsOf(pts, diag, true);
+    if (merged.length < 3) return null;
+    return { diag, bbox, lines: merged.map(lineOf) };
+  };
+  // odseki obrisa z zaokroženo smerjo, zaporedni v isti smeri združeni
+  const segsOf = (pts, diag, closed) => {
     const segs = [];
     for (let i = 0; i < pts.length - 1; i++) {
       const a = pts[i], b = pts[i + 1], len = dist(a, b);
@@ -170,24 +218,19 @@
       const last = merged[merged.length - 1];
       if (last && last.key === s.key) { last.len += s.len; last.mx += s.mx; last.my += s.my; } else merged.push({ ...s });
     }
-    if (merged.length > 1 && merged[0].key === merged[merged.length - 1].key) {
+    if (closed && merged.length > 1 && merged[0].key === merged[merged.length - 1].key) {
       const l = merged.pop(); merged[0].len += l.len; merged[0].mx += l.mx; merged[0].my += l.my;
     }
-    if (merged.length < 3) return null;
-    return {
-      diag, bbox: { x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) },
-      lines: merged.map(s => {
-        const rad = s.key * Math.PI / 180;
-        return { key: s.key, p: { x: s.mx / s.len, y: s.my / s.len }, u: { x: Math.cos(rad), y: Math.sin(rad) } };
-      })
-    };
+    return merged;
   };
   const polyFromLines = (L, tol) => {
     const { xs, ys } = wallCoords();
+    // pripenjanje nikoli ne sme bistveno spremeniti velikosti prostora (ozki prostori, majhen zaslon)
+    const tolY = Math.min(tol, 0.2 * (L.bbox.y1 - L.bbox.y0)), tolX = Math.min(tol, 0.2 * (L.bbox.x1 - L.bbox.x0));
     const lines = L.lines.map(l => {
       const p = { ...l.p };
-      if (l.key === 0) p.y = nearest(p.y, ys, tol);
-      if (l.key === 90) p.x = nearest(p.x, xs, tol);
+      if (l.key === 0) p.y = nearest(p.y, ys, tolY);
+      if (l.key === 90) p.x = nearest(p.x, xs, tolX);
       return { ...l, p };
     });
     const cross = (l1, l2) => {
@@ -217,19 +260,23 @@
       if (Math.abs(a.y - b.y) < 0.5) ex.push({ h: true, c: a.y, lo: Math.min(a.x, b.x), hi: Math.max(a.x, b.x) });
       else if (Math.abs(a.x - b.x) < 0.5) ex.push({ h: false, c: a.x, lo: Math.min(a.y, b.y), hi: Math.max(a.y, b.y) });
     }));
+    const bw = Math.max(...pts.map(p => p.x)) - Math.min(...pts.map(p => p.x));
+    const bh = Math.max(...pts.map(p => p.y)) - Math.min(...pts.map(p => p.y));
     for (let i = 0; i < out.length; i++) {
       const a = out[i], b = out[(i + 1) % out.length];
       const h = Math.abs(a.y - b.y) < 0.5, v = Math.abs(a.x - b.x) < 0.5;
+      const lim = Math.min(tol, 0.45 * (h ? bh : bw));
       if (!h && !v) continue;
       const c = h ? a.y : a.x, lo = h ? Math.min(a.x, b.x) : Math.min(a.y, b.y), hi = h ? Math.max(a.x, b.x) : Math.max(a.y, b.y);
-      let best = null;
+      let best = null, flush = false;
       ex.forEach(w => {
         if (w.h !== h) return;
         const d = Math.abs(w.c - c);
         const ov = Math.min(hi, w.hi) - Math.max(lo, w.lo);
-        if (d > 0.01 && d < tol && ov > 0.3 * Math.min(hi - lo, w.hi - w.lo) && (!best || d < best.d)) best = { d, c: w.c };
+        if (d <= 0.5 && ov > 0) flush = true;          // zid se že stika z obstoječim — ne premikamo ga
+        if (d > 0.5 && d < lim && ov > 0.3 * Math.min(hi - lo, w.hi - w.lo) && (!best || d < best.d)) best = { d, c: w.c };
       });
-      if (best) { if (h) { a.y = best.c; b.y = best.c; } else { a.x = best.c; b.x = best.c; } }
+      if (best && !flush) { if (h) { a.y = best.c; b.y = best.c; } else { a.x = best.c; b.x = best.c; } }
     }
     return areaPx(out) > 900 ? out : pts;
   };
@@ -241,15 +288,23 @@
     pts = closeGaps(pts, 70 * k);
     return pts.map(v => ({ x: Math.round(v.x * 10) / 10, y: Math.round(v.y * 10) / 10 }));
   };
+  // tresenje prsta zgladimo (drseče povprečje), konca poteze ostaneta, kjer sta bila
+  const smooth = (raw, w) => raw.map((p, i) => {
+    if (i < w || i >= raw.length - w) return p;
+    let x = 0, y = 0;
+    for (let j = i - w; j <= i + w; j++) { x += raw[j].x; y += raw[j].y; }
+    return { x: x / (2 * w + 1), y: y / (2 * w + 1) };
+  });
   const straighten = raw => {
     if (raw.length < 6) return null;
-    const L = toLines(raw);
+    const L = toLines(raw.length > 12 ? smooth(raw, 2) : raw);
     return L ? fit(tol => polyFromLines(L, tol)) : null;
   };
   const rectFrom = (a, b) => fit(tol => {
     const { xs, ys } = wallCoords();
-    const x0 = nearest(Math.min(a.x, b.x), xs, tol), x1 = nearest(Math.max(a.x, b.x), xs, tol);
-    const y0 = nearest(Math.min(a.y, b.y), ys, tol), y1 = nearest(Math.max(a.y, b.y), ys, tol);
+    const tX = Math.min(tol, 0.2 * Math.abs(a.x - b.x)), tY = Math.min(tol, 0.2 * Math.abs(a.y - b.y));
+    const x0 = nearest(Math.min(a.x, b.x), xs, tX), x1 = nearest(Math.max(a.x, b.x), xs, tX);
+    const y0 = nearest(Math.min(a.y, b.y), ys, tY), y1 = nearest(Math.max(a.y, b.y), ys, tY);
     if (x1 - x0 < 30 || y1 - y0 < 30) return null;
     return [{ x: x0, y: y0 }, { x: x1, y: y0 }, { x: x1, y: y1 }, { x: x0, y: y1 }];
   });
@@ -321,8 +376,9 @@
       doors = os.filter(o => o.type === 'door').length;
       wins = os.filter(o => o.type === 'window').length;
     } else { doors = 1; wins = 1; }          // privzeto, dokler stranka ne označi ničesar
-    const wallsM2 = Math.max(0, perimM * state.height - doors * OPEN.door.w * OPEN.door.h - wins * OPEN.window.w * OPEN.window.h);
-    return { floor, walls: wallsM2, ceiling: floor, total: wallsM2 + floor, doors, wins };
+    const h = r.h || state.height;
+    const wallsM2 = Math.max(0, perimM * h - doors * OPEN.door.w * OPEN.door.h - wins * OPEN.window.w * OPEN.window.h);
+    return { floor, walls: wallsM2, ceiling: floor, total: wallsM2 + floor, doors, wins, h };
   };
 
   /* ---------- IZRIS ---------- */
@@ -420,7 +476,7 @@
     return 4;
   };
   const HINTS = {
-    1: '<b>Korak 1 ·</b> S prstom narišite obris prostora — ali samo potegnite diagonalo za pravokoten prostor. Sosednje prostore rišite kar ob obstoječih zidovih.',
+    1: '<b>Korak 1 ·</b> S prstom narišite obris prostora — ali samo potegnite diagonalo za pravokoten prostor. Pri sosednjem prostoru zadošča, da narišete samo manjkajoče stene — od zidu do zidu.',
     2: '<b>Korak 2 ·</b> Izberite <b>Vrata</b> ali <b>Okno</b> in tapnite zid, kjer so. Ponoven tap jih odstrani.',
     3: '<b>Korak 3 ·</b> Izberite <b>Mere</b>, tapnite en zid in vpišite njegovo pravo dolžino. Vse ostale mere se preračunajo.',
     4: '<b>Končano ·</b> Preverite še višino stropa desno. Tloris lahko pošljete skupaj s povpraševanjem.'
@@ -447,7 +503,7 @@
       btn.type = 'button';
       btn.innerHTML = '<b></b><span></span>';
       btn.querySelector('b').textContent = r.name;
-      btn.querySelector('span').textContent = `${fmt(c.floor, 1)} m² · vrata ${c.doors} · okna ${c.wins}`;
+      btn.querySelector('span').textContent = `${fmt(c.floor, 1)} m² · vrata ${c.doors} · okna ${c.wins}` + (r.h ? ` · višina ${fmt(r.h, 2)} m` : '');
       btn.addEventListener('click', () => { setMode('edit'); select({ type: 'room', room: r.id }); });
       li.appendChild(btn);
       list.appendChild(li);
@@ -487,6 +543,9 @@
       boxes.room.hidden = false;
       if (document.activeElement !== $('#edName')) $('#edName').value = r.name;
       $('#edArea').value = (areaPx(r.pts) / state.upm / state.upm).toFixed(1);
+      if (document.activeElement !== $('#edH')) $('#edH').value = r.h ? r.h.toFixed(2) : '';
+      $('#edH').placeholder = state.height.toFixed(2);
+      $('#edH').classList.remove('is-bad');
     }
   };
 
@@ -518,6 +577,18 @@
   $('#edWallLen').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('#edWallSet').click(); } });
   $('#edAreaSet').addEventListener('click', () => setRoomArea(num($('#edArea').value)));
   $('#edArea').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('#edAreaSet').click(); } });
+  const setRoomHeight = () => {
+    const r = state.sel && state.rooms.find(x => x.id === state.sel.room);
+    if (!r) return;
+    const v = $('#edH').value.trim();
+    if (!v) { delete r.h; render(); return; }
+    const h = num(v);
+    if (!(h >= 2 && h <= 6)) { $('#edH').classList.add('is-bad'); return; }
+    r.h = Math.round(h * 100) / 100;
+    render();
+  };
+  $('#edHSet').addEventListener('click', setRoomHeight);
+  $('#edH').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); setRoomHeight(); } });
   $('#edName').addEventListener('input', e => {
     const r = state.sel && state.rooms.find(x => x.id === state.sel.room);
     if (r) { r.name = e.target.value || 'Prostor'; renderPanel(); render(); }
@@ -581,15 +652,18 @@
 
   // višina stropa
   const hInput = $('#planH');
-  const setHeight = h => {
-    if (!(h >= 2 && h <= 6)) return;
-    state.height = h;
-    $$('.plan__h button').forEach(b => b.classList.toggle('is-active', +b.dataset.h === h));
-    hInput.value = h.toFixed(2);
+  const setHeight = (h, fromInput) => {
+    if (!(h >= 2 && h <= 6)) return false;
+    state.height = Math.round(h * 100) / 100;
+    $$('.plan__h button').forEach(b => b.classList.toggle('is-active', Math.abs(+b.dataset.h - state.height) < 0.001));
+    if (!fromInput) hInput.value = state.height.toFixed(2);
+    hInput.classList.remove('is-bad');
     renderPanel();
+    return true;
   };
   $$('.plan__h button').forEach(b => b.addEventListener('click', () => setHeight(+b.dataset.h)));
-  hInput.addEventListener('change', () => setHeight(num(hInput.value)));
+  hInput.addEventListener('input', () => { if (!setHeight(num(hInput.value), true)) hInput.classList.toggle('is-bad', hInput.value.trim() !== ''); });
+  hInput.addEventListener('change', () => { if (!setHeight(num(hInput.value))) { hInput.value = state.height.toFixed(2); hInput.classList.remove('is-bad'); } });
   $$('.plan__rates .calc__opt').forEach(o => o.addEventListener('click', () => {
     state.rate = +o.dataset.rate;
     $$('.plan__rates .calc__opt').forEach(b => b.classList.toggle('is-active', b === o));
@@ -645,7 +719,7 @@
   const summaryText = () => {
     const lines = state.rooms.map(r => {
       const c = roomCalc(r);
-      return `${r.name}: ${fmt(c.floor, 1)} m² tal, stene ${fmt(c.walls, 1)} m², strop ${fmt(c.ceiling, 1)} m² (vrata ${c.doors}, okna ${c.wins})`;
+      return `${r.name}${r.h ? ` (višina ${fmt(r.h, 2)} m)` : ''}: ${fmt(c.floor, 1)} m² tal, stene ${fmt(c.walls, 1)} m², strop ${fmt(c.ceiling, 1)} m² (vrata ${c.doors}, okna ${c.wins})`;
     });
     const t = state.rooms.reduce((s, r) => s + roomCalc(r).total, 0);
     return `Tloris (višina stropa ${fmt(state.height, 2)} m${state.calibrated ? '' : ', mere ocenjene'}${anyMarked() ? '' : ', vrata/okna privzeto'}):\n` +
