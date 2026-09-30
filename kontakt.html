@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0e0e10" />
+  <title>Kontakt | POBELI ME</title>
+  <meta name="description" content="Povejte nam o svojem prostoru. V 24 urah se oglasimo z brezplačno oceno in okvirno ceno." />
+  <meta name="keywords" content="pleskar Maribor, pleskarstvo, barvanje sten, kitanje sten, pleskanje, beljenje sten, odvoz na deponijo, čiščenje" />
+  <meta name="author" content="Pobeli Me" />
+  <link rel="canonical" href="https://pobelime.si/kontakt.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="POBELI ME" />
+  <meta property="og:locale" content="sl_SI" />
+  <meta property="og:title" content="POBELI ME" />
+  <meta property="og:description" content="Barvanje in kitanje sten do perfekcije. Brez nereda, brez stresa — samo barve, ki spremenijo vse." />
+  <meta property="og:url" content="https://pobelime.si/kontakt.html" />
+  <meta property="og:image" content="assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="POBELI ME" />
+  <meta name="twitter:description" content="Pobarvamo vaš prostor v zgodbo. Pleskarstvo z dušo iz Maribora." />
+  <meta name="twitter:image" content="assets/og-image.png" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="kontakt">
+  <a href="#vrh" class="skip">Preskoči na vsebino</a>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="cursor" id="cursor"><span></span></div>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <a href="index.html" class="nav__brand" data-cursor="hover" aria-label="POBELI ME — domov">
+      <span class="nav__name">Pobeli Me</span>
+    </a>
+    <nav class="nav__links" aria-label="Glavna navigacija">
+      <a href="storitve.html" data-cursor="hover">Storitve</a>
+      <a href="projekti.html" data-cursor="hover">Projekti</a>
+      <a href="cena.html" data-cursor="hover">Cena</a>
+      <a href="postopek.html" data-cursor="hover">Postopek</a>
+      <a href="o-nas.html" data-cursor="hover">O nas</a>
+      <a href="vprasanja.html" data-cursor="hover">Vprašanja</a>
+    </nav>
+    <a href="kontakt.html" class="btn btn--pill nav__cta" data-cursor="hover">
+      <span>Brezplačna ponudba</span>
+    </a>
+    <button class="nav__burger" id="burger" aria-label="Meni"><i></i><i></i></button>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="menu" id="menu">
+    <nav>
+      <a href="storitve.html">Storitve</a>
+      <a href="projekti.html">Projekti</a>
+      <a href="cena.html">Cena</a>
+      <a href="postopek.html">Postopek</a>
+      <a href="o-nas.html">O nas</a>
+      <a href="vprasanja.html">Vprašanja</a>
+      <a href="kontakt.html" class="is-active" aria-current="page">Kontakt</a>
+    </nav>
+    <div class="menu__foot">
+      <a href="tel:+38670577333">+386 70 577 333</a>
+      <a href="mailto:info@pobelime.si">info@pobelime.si</a>
+    </div>
+  </div>
+
+  <main id="vrh">
+<!-- KONTAKT -->
+    <section class="contact" id="kontakt">
+      <div class="contact__grid">
+        <div class="contact__intro reveal">
+          <p class="sec-kicker">Kontakt</p>
+          <h2 class="contact__title">Pobeli me.<br/>Spremeni vse.</h2>
+          <p class="contact__p">Povejte nam o svojem prostoru. V 24 urah se oglasimo z brezplačno
+            oceno in okvirno ceno.</p>
+          <ul class="contact__info">
+            <li><span>Telefon</span><a href="tel:+38670577333" data-cursor="hover">Miha Pohar: 070 577 333</a><br><a href="tel:+38631544416" data-cursor="hover">Aljaž Skornšek: 031 544 416</a></li>
+            <li><span>E-pošta</span><a href="mailto:info@pobelime.si" data-cursor="hover">info@pobelime.si</a></li>
+            <li><span>Kje</span><a data-cursor="hover">Maribor &amp; okolica (Štajerska)</a></li>
+            <li><span>Instagram</span><a href="#" data-cursor="hover">@pobeli.me</a></li>
+          </ul>
+        </div>
+
+        <form class="form reveal" id="form" action="/api/contact" method="post" novalidate>
+          <div class="field">
+            <input type="text" id="ime" name="ime" required placeholder=" " data-cursor="hover" />
+            <label for="ime">Ime in priimek</label>
+          </div>
+          <div class="field">
+            <input type="email" id="email" name="email" required placeholder=" " data-cursor="hover" />
+            <label for="email">E-pošta</label>
+          </div>
+          <div class="field">
+            <input type="tel" id="tel" name="tel" placeholder=" " data-cursor="hover" />
+            <label for="tel">Telefon (neobvezno)</label>
+          </div>
+          <div class="field">
+            <select id="tip" name="tip" data-cursor="hover" required>
+              <option value="" disabled selected></option>
+              <option>Barvanje sten</option>
+              <option>Kitanje &amp; priprava</option>
+              <option>Perfektne stene</option>
+              <option>Odvoz na deponijo</option>
+              <option>Drugo</option>
+            </select>
+            <label for="tip">Tip projekta</label>
+          </div>
+          <div class="field field--full">
+            <textarea id="sporocilo" name="sporocilo" rows="3" placeholder=" " data-cursor="hover"></textarea>
+            <label for="sporocilo">Povejte nam več o prostoru</label>
+          </div>
+          <div class="field field--full field--file">
+            <label for="slike">Fotografije sten</label>
+            <p>Dodajte do 8 fotografij sten ali prostorov. Tako vam lahko pripravimo natančnejšo prvo oceno.</p>
+            <input type="file" id="slike" name="slike[]" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple data-cursor="hover" aria-describedby="fileStatus fileRules" />
+            <span class="file__status" id="fileStatus">Izberite fotografije sten</span>
+            <small class="file__rules" id="fileRules">JPG, PNG, WEBP ali HEIC · največ 8 fotografij · pred pošiljanjem jih samodejno pomanjšamo</small>
+            <div class="file__preview" id="filePreview" aria-live="polite"></div>
+          </div>
+          <div class="field field--full plan-attach" id="planAttach" hidden>
+            <img id="planAttachImg" alt="Priložen tloris" />
+            <div>
+              <b>Priložen tloris</b>
+              <p id="planAttachTxt"></p>
+              <button type="button" id="planAttachRemove" class="plan__link">Odstrani tloris</button>
+            </div>
+          </div>
+          <div class="hp" aria-hidden="true"><label for="website">Spletna stran</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off" /></div>
+          <button type="submit" class="btn btn--solid btn--block magnetic" data-cursor="hover">
+            <span>Pošlji povpraševanje</span>
+          </button>
+          <p class="form__note" id="formNote" role="status"></p>
+          <p class="form__privacy">Podatke in fotografije uporabimo samo za pripravo vaše ponudbe in jih ne posredujemo tretjim osebam.</p>
+        </form>
+      </div>
+    </section>
+  
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img class="footer__logo" src="assets/logo.png" alt="POBELI ME logotip" />
+        <p>Pleskarstvo z dušo. Vaš prostor, pobarvan v zgodbo — čisto, natančno in brez nereda.</p>
+        <a href="kontakt.html" class="btn btn--solid magnetic" data-cursor="hover"><span>Začni projekt</span></a>
+      </div>
+      <nav class="footer__col">
+        <h4>Storitve</h4>
+        <a href="storitve.html" data-cursor="hover">Barvanje sten</a>
+        <a href="storitve.html" data-cursor="hover">Kitanje &amp; priprava</a>
+        <a href="storitve.html" data-cursor="hover">Perfektne stene</a>
+        <a href="storitve.html" data-cursor="hover">Odvoz na deponijo</a>
+      </nav>
+      <nav class="footer__col">
+        <h4>Povezave</h4>
+        <a href="projekti.html" data-cursor="hover">Projekti</a>
+        <a href="postopek.html" data-cursor="hover">Postopek</a>
+        <a href="o-nas.html" data-cursor="hover">O nas</a>
+        <a href="vprasanja.html" data-cursor="hover">Pogosta vprašanja</a>
+      </nav>
+      <div class="footer__col">
+        <h4>Kontakt</h4>
+        <a href="tel:+38670577333" data-cursor="hover">Miha Pohar: 070 577 333</a><br><a href="tel:+38631544416" data-cursor="hover">Aljaž Skornšek: 031 544 416</a>
+        <a href="mailto:info@pobelime.si" data-cursor="hover">info@pobelime.si</a>
+        <a href="https://instagram.com/pobeli.me" data-cursor="hover">@pobeli.me</a>
+        <a data-cursor="hover">Maribor, Slovenija</a>
+      </div>
+    </div>
+    <p class="footer__tag">Barvamo · kitamo · počistimo · odpeljemo staro.</p>
+    <div class="footer__big">POBELI ME</div>
+    <div class="footer__row">
+      <p>© <span id="year"></span> Pobeli Me</p>
+      <a href="#vrh" data-cursor="hover">Nazaj na vrh ↑</a>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button class="totop" id="totop" aria-label="Nazaj na vrh" data-cursor="hover">↑</button>
+
+  <script src="script.js"></script>
+  <script src="tloris.js"></script>
+</body>
+</html>

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://pobelime.si/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://pobelime.si/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://pobelime.si/storitve.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://pobelime.si/cena.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://pobelime.si/projekti.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://pobelime.si/postopek.html</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://pobelime.si/o-nas.html</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://pobelime.si/vprasanja.html</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://pobelime.si/kontakt.html</loc><changefreq>yearly</changefreq><priority>0.8</priority></url>
 </urlset>

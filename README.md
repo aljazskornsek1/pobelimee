@@ -22,12 +22,17 @@ Pleskarstvo & barvni studio. Statična spletna stran (HTML / CSS / JS, brez buil
 | `site.webmanifest` | PWA manifest |
 | `robots.txt`, `sitemap.xml` | SEO |
 
-## Kaj je treba posodobiti pred objavo
-- **Kontakt:** telefon `+386 70 577 333` in e-pošta `info@pobelime.si` (v `index.html` ter v JSON-LD v `<head>`).
-- **Kontaktni obrazec:** pošilja na `contact.php`, zato mora biti stran objavljena na hostingu s podporo za PHP in pošiljanje e-pošte.
-- **Domena:** vse `https://pobelime.si/` zamenjaj s svojo (meta oznake, sitemap, robots, manifest).
-- **Instagram:** povezava `@pobeli.me`.
-- **Obrazec:** trenutno pokaže potrditveno sporočilo brez pošiljanja. Za pravo pošiljanje poveži npr. [Formspree](https://formspree.io) ali lasten backend.
+## Strani
+`index.html` (domov), `storitve.html`, `projekti.html`, `postopek.html`, `cena.html` (kalkulator + risanje tlorisa, `tloris.js`), `o-nas.html`, `vprasanja.html`, `kontakt.html`.
+
+## Kontaktni obrazec (Vercel + Resend)
+- Obrazec pošlje povpraševanje na `/api/contact` (datoteka `api/contact.js`), ta pa prek [Resend](https://resend.com) pošlje mail na info@pobelime.si (s fotografijami in tlorisom) ter potrditev stranki.
+- Fotografije se v brskalniku pred pošiljanjem pomanjšajo (Vercel sprejme največ ~4,5 MB na zahtevo).
+- V Vercelu → Settings → Environment Variables nastavi:
+  - `RESEND_API_KEY` = ključ iz Resenda (obvezno)
+  - `CONTACT_TO` = kam gredo povpraševanja (neobvezno, privzeto info@pobelime.si)
+- Domena pobelime.si mora biti v Resendu potrjena (Domains → Verified), sicer mail iz info@pobelime.si ne gre ven.
+- `contact.php` ni več v uporabi (Vercel PHP ne izvaja).
 
 ## Objava (brezplačno)
 Povleci mapo na [Netlify Drop](https://app.netlify.com/drop) ali [Vercel](https://vercel.com) — stran je takoj na spletu.

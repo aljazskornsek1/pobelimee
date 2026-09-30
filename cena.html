@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0e0e10" />
+  <title>Izračun cene | POBELI ME</title>
+  <meta name="description" content="Izračunajte okvirno ceno barvanja in kitanja sten za vaš prostor v nekaj sekundah." />
+  <meta name="keywords" content="pleskar Maribor, pleskarstvo, barvanje sten, kitanje sten, pleskanje, beljenje sten, odvoz na deponijo, čiščenje" />
+  <meta name="author" content="Pobeli Me" />
+  <link rel="canonical" href="https://pobelime.si/cena.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="POBELI ME" />
+  <meta property="og:locale" content="sl_SI" />
+  <meta property="og:title" content="POBELI ME" />
+  <meta property="og:description" content="Barvanje in kitanje sten do perfekcije. Brez nereda, brez stresa — samo barve, ki spremenijo vse." />
+  <meta property="og:url" content="https://pobelime.si/cena.html" />
+  <meta property="og:image" content="assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="POBELI ME" />
+  <meta name="twitter:description" content="Pobarvamo vaš prostor v zgodbo. Pleskarstvo z dušo iz Maribora." />
+  <meta name="twitter:image" content="assets/og-image.png" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="cena">
+  <a href="#vrh" class="skip">Preskoči na vsebino</a>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="cursor" id="cursor"><span></span></div>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <a href="index.html" class="nav__brand" data-cursor="hover" aria-label="POBELI ME — domov">
+      <span class="nav__name">Pobeli Me</span>
+    </a>
+    <nav class="nav__links" aria-label="Glavna navigacija">
+      <a href="storitve.html" data-cursor="hover">Storitve</a>
+      <a href="projekti.html" data-cursor="hover">Projekti</a>
+      <a href="cena.html" class="is-active" aria-current="page" data-cursor="hover">Cena</a>
+      <a href="postopek.html" data-cursor="hover">Postopek</a>
+      <a href="o-nas.html" data-cursor="hover">O nas</a>
+      <a href="vprasanja.html" data-cursor="hover">Vprašanja</a>
+    </nav>
+    <a href="kontakt.html" class="btn btn--pill nav__cta" data-cursor="hover">
+      <span>Brezplačna ponudba</span>
+    </a>
+    <button class="nav__burger" id="burger" aria-label="Meni"><i></i><i></i></button>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="menu" id="menu">
+    <nav>
+      <a href="storitve.html">Storitve</a>
+      <a href="projekti.html">Projekti</a>
+      <a href="cena.html" class="is-active" aria-current="page">Cena</a>
+      <a href="postopek.html">Postopek</a>
+      <a href="o-nas.html">O nas</a>
+      <a href="vprasanja.html">Vprašanja</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+    <div class="menu__foot">
+      <a href="tel:+38670577333">+386 70 577 333</a>
+      <a href="mailto:info@pobelime.si">info@pobelime.si</a>
+    </div>
+  </div>
+
+  <main id="vrh">
+<!-- KALKULATOR -->
+    <section class="calc" id="kalkulator">
+      <div class="calc__inner">
+        <div class="calc__intro reveal">
+          <p class="sec-kicker">Okvirna cena</p>
+          <h2 class="sec-title">Izračunajte ceno<br/>v nekaj sekundah.</h2>
+          <p class="calc__p">Vnesite tloris in število prostorov — kalkulator vsak prostor
+            izračuna posebej in sešteje <b>vse stene in strop</b>. Nato izberite vrsto dela in dobite okvirno ceno.
+            Stanovanje ima namreč veliko več površine sten, kot meri tloris.</p>
+        </div>
+
+        <div class="calc__card reveal">
+          <div class="calc__row">
+            <label for="m2">Tloris skupaj</label>
+            <output id="m2out">25 m²</output>
+          </div>
+          <input type="range" id="m2" min="6" max="200" step="1" value="25" data-cursor="hover" />
+          <div class="calc__hint"><span>6 m²</span><span>200 m²</span></div>
+
+          <div class="calc__chips" role="group" aria-label="Hitra izbira">
+            <button type="button" data-m2="16" data-rooms="1">Manjša soba ~16 m²</button>
+            <button type="button" data-m2="30" data-rooms="1">Dnevna soba ~30 m²</button>
+            <button type="button" data-m2="70" data-rooms="4">Stanovanje ~70 m²</button>
+            <button type="button" data-m2="120" data-rooms="6">Hiša ~120 m²</button>
+          </div>
+
+          <div class="calc__set">
+            <div class="calc__setrow">
+              <span class="calc__optlabel" id="roomsLabel">Število prostorov</span>
+              <div class="calc__stepper" role="group" aria-labelledby="roomsLabel">
+                <button type="button" id="roomsMinus" aria-label="Manj prostorov" data-cursor="hover">−</button>
+                <output id="rooms" aria-live="polite">1</output>
+                <button type="button" id="roomsPlus" aria-label="Več prostorov" data-cursor="hover">+</button>
+              </div>
+            </div>
+            <p class="calc__small">Sobe, dnevna, kuhinja, hodnik. Kopalnice in WC-ja s ploščicami ne štejte.</p>
+
+            <div class="calc__setrow">
+              <span class="calc__optlabel" id="hLabel">Višina stropa</span>
+              <div class="calc__seg" role="group" aria-labelledby="hLabel">
+                <button type="button" data-h="2.5">2,5 m</button>
+                <button type="button" data-h="2.6" class="is-active">2,6 m</button>
+                <button type="button" data-h="2.8">2,8 m</button>
+                <button type="button" data-h="3">3 m</button>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="calc__surface">
+            <span>Za barvanje: stene <b id="walls">52</b> m² + strop <b id="ceil">25</b> m²</span>
+            <b><span id="surface">77</span> m²</b>
+          </div>
+
+          <div class="calc__opts" role="group" aria-label="Kaj potrebujete">
+            <span class="calc__optlabel">Kaj potrebujete?</span>
+            <div class="calc__optrow">
+              <button type="button" class="calc__opt" data-rate="4" data-cursor="hover">
+                <b>Enojni premaz</b><small>4 €/m²</small></button>
+              <button type="button" class="calc__opt is-active" data-rate="5" data-cursor="hover">
+                <b>Dvojni premaz</b><small>5 €/m²</small></button>
+              <button type="button" class="calc__opt" data-rate="7" data-cursor="hover">
+                <b>Kitanje + brušenje</b><small>7 €/m²</small></button>
+              <button type="button" class="calc__opt" data-rate="10" data-cursor="hover">
+                <b>Celovito · kitanje + brušenje + emulzija + 2× premaz</b><small>10 €/m²</small></button>
+            </div>
+          </div>
+
+          <div class="calc__result">
+            <div>
+              <span class="calc__label">Vaša okvirna cena</span>
+              <div class="calc__price"><b id="price">385</b> €</div>
+            </div>
+            <a href="kontakt.html" class="btn btn--solid magnetic" data-cursor="hover"><span>Želim točno ponudbo</span></a>
+          </div>
+          <a href="#tloris" class="calc__more" data-cursor="hover">Želite natančneje? Narišite tloris stanovanja ↓</a>
+          <p class="calc__fast">⚡ Pokličete in pridemo hitro — delo začnemo brez velikega čakanja.</p>
+          <p class="calc__note">* Vsak prostor računamo kot kvadraten (npr. soba 5 × 5 m, višina 3 m = 60 m² sten + 25 m² stropa)
+            in odštejemo ena vrata (0,8 × 2 m) ter eno okno (1,2 × 1,4 m). Ni zavezujoča ponudba —
+            točno ceno dobite po brezplačnem ogledu.</p>
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- TLORIS -->
+    <section class="plan" id="tloris">
+      <div class="sec-head">
+        <p class="sec-kicker reveal">Natančen izračun</p>
+        <h2 class="sec-title reveal">Narišite tloris.<br/>Mi ga zravnamo.</h2>
+        <p class="plan__lead reveal">S prstom ali miško narišite obris vsakega prostora. Črte se same poravnajo v ravne stene,
+          na zidovih se izpišejo mere, v prostoru pa kvadratura. Vpišite eno pravo mero in višino stropa — dobite natančno
+          površino in ceno, tloris pa nam lahko pošljete skupaj s povpraševanjem.</p>
+      </div>
+
+      <div class="plan__grid reveal">
+        <div class="plan__board">
+          <ol class="plan__steps" aria-label="Koraki">
+            <li data-step="1"><span>1</span>Prostori</li>
+            <li data-step="2"><span>2</span>Vrata in okna</li>
+            <li data-step="3"><span>3</span>Ena mera</li>
+            <li data-step="4"><span>4</span>Višina</li>
+          </ol>
+          <div class="plan__tools" role="toolbar" aria-label="Orodja">
+            <button type="button" class="plan__tool is-active" data-mode="draw" aria-pressed="true" data-cursor="hover">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c3-6 6 2 9-4s5-8 9-6"/></svg>Nariši</button>
+            <button type="button" class="plan__tool" data-mode="door" aria-pressed="false" data-cursor="hover">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M6 20V6M6 6a12 12 0 0 1 12 12"/></svg>Vrata</button>
+            <button type="button" class="plan__tool" data-mode="window" aria-pressed="false" data-cursor="hover">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h18M3 14h18M3 7v10M21 7v10"/></svg>Okno</button>
+            <button type="button" class="plan__tool" data-mode="edit" aria-pressed="false" data-cursor="hover">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l4 4 14-14-4-4zM14 6l4 4"/></svg>Mere</button>
+          </div>
+          <p class="plan__hint" id="planHint" role="status"></p>
+          <div class="plan__canvas">
+            <svg id="planSvg" viewBox="0 0 1000 1000" role="img" aria-label="Risalna površina za tloris">
+              <defs>
+                <pattern id="planGrid" width="50" height="50" patternUnits="userSpaceOnUse">
+                  <path d="M50 0H0V50" fill="none" stroke="rgba(16,16,20,.07)" stroke-width="1.5"/>
+                </pattern>
+              </defs>
+              <rect class="plan__bg" width="1000" height="1000" fill="url(#planGrid)"/>
+              <g id="planLayer"></g>
+              <polyline id="planPreview" points="" fill="none" class="plan__preview"/>
+            </svg>
+            <div class="plan__empty" id="planEmpty">
+              <svg viewBox="0 0 120 80" aria-hidden="true"><path class="plan__demo" d="M18 16c20-3 50 2 80-1 3 14-2 30 2 48-26 3-54-2-82 1-2-16 3-32 0-48z"/></svg>
+              <p><b>Narišite prvi prostor</b><br/>Obris s prstom ali samo diagonala.<br/>Črte se poravnajo same.</p>
+            </div>
+          </div>
+          <div class="plan__aux">
+            <button type="button" id="planUndo" data-cursor="hover">Razveljavi</button>
+            <button type="button" id="planClear" data-cursor="hover">Počisti</button>
+            <button type="button" id="planSample" data-cursor="hover">Pokaži primer</button>
+          </div>
+        </div>
+
+        <aside class="plan__panel calc__card" aria-label="Izračun iz tlorisa">
+          <p class="plan__scale" id="planScale" hidden>Mere so zaenkrat ocena. Z orodjem <b>Mere</b> tapnite en zid in vpišite njegovo dolžino.</p>
+
+          <div class="plan__editor" id="planEditor" hidden>
+            <div id="edWall" hidden>
+              <span class="calc__optlabel" id="edWallLbl">Zid</span>
+              <div class="plan__inrow">
+                <label class="sr" for="edWallLen">Dolžina zidu v metrih</label>
+                <input type="text" inputmode="decimal" id="edWallLen" />
+                <span>m</span>
+                <button type="button" id="edWallSet" class="plan__apply">Nastavi</button>
+              </div>
+              <button type="button" id="edBackRoom" class="plan__link">Uredi prostor →</button>
+            </div>
+            <div id="edRoom" hidden>
+              <label class="calc__optlabel" for="edName">Ime prostora</label>
+              <input type="text" id="edName" class="plan__name-in" />
+              <span class="calc__optlabel" id="edAreaLbl">Kvadratura tal</span>
+              <div class="plan__inrow">
+                <label class="sr" for="edArea">Kvadratura prostora v m²</label>
+                <input type="text" inputmode="decimal" id="edArea" aria-describedby="edAreaLbl" />
+                <span>m²</span>
+                <button type="button" id="edAreaSet" class="plan__apply">Nastavi</button>
+              </div>
+              <button type="button" id="edDelete" class="plan__link plan__link--del">Izbriši prostor</button>
+            </div>
+            <div id="edOpen" hidden>
+              <span class="calc__optlabel" id="edOpenLbl">Odprtina</span>
+              <div class="calc__seg" role="group" aria-label="Vrsta odprtine">
+                <button type="button" data-otype="door">Vrata</button>
+                <button type="button" data-otype="window">Okno</button>
+              </div>
+              <button type="button" id="edOpenDelete" class="plan__link plan__link--del">Odstrani</button>
+            </div>
+          </div>
+
+          <ul class="plan__list" id="planRooms"></ul>
+
+          <div class="calc__setrow plan__hrow">
+            <label class="calc__optlabel" for="planH">Višina stropa</label>
+            <div class="plan__hin"><input type="text" inputmode="decimal" id="planH" value="2.60" /><span>m</span></div>
+          </div>
+          <div class="calc__seg plan__h" role="group" aria-label="Hitra izbira višine">
+            <button type="button" data-h="2.5">2,5 m</button>
+            <button type="button" data-h="2.6" class="is-active">2,6 m</button>
+            <button type="button" data-h="2.8">2,8 m</button>
+            <button type="button" data-h="3">3 m</button>
+          </div>
+
+          <div class="calc__opts plan__rates" role="group" aria-label="Vrsta dela">
+            <span class="calc__optlabel">Kaj potrebujete?</span>
+            <div class="calc__optrow">
+              <button type="button" class="calc__opt" data-rate="4"><b>Enojni premaz</b><small>4 €/m²</small></button>
+              <button type="button" class="calc__opt is-active" data-rate="5"><b>Dvojni premaz</b><small>5 €/m²</small></button>
+              <button type="button" class="calc__opt" data-rate="7"><b>Kitanje + brušenje</b><small>7 €/m²</small></button>
+              <button type="button" class="calc__opt" data-rate="10"><b>Celovito · kitanje + brušenje + emulzija + 2× premaz</b><small>10 €/m²</small></button>
+            </div>
+          </div>
+
+          <p class="plan__default" id="planDefault" hidden>Vrata in okna še niso označena, zato računamo ena vrata in eno okno na prostor.</p>
+          <div class="calc__surface">
+            <span>Stene <b id="planWalls">0</b> m² + strop <b id="planCeil">0</b> m²</span>
+            <b><span id="planTotal">0</span> m²</b>
+          </div>
+          <div class="calc__result">
+            <div>
+              <span class="calc__label">Cena po tlorisu</span>
+              <div class="calc__price"><b id="planPrice">0</b> €</div>
+            </div>
+            <button type="button" class="btn btn--solid" id="planSend" disabled><span>Pošlji tloris s povpraševanjem</span></button>
+          </div>
+          <p class="calc__note">* Za vsaka označena vrata odštejemo 0,8 × 2 m, za okno 1,2 × 1,4 m. Vrata v skupnem zidu se odštejejo obema prostoroma. Strop je vedno vključen.
+            Ni zavezujoča ponudba — točno ceno potrdimo ob brezplačnem ogledu.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- NAPREJ -->
+    <section class="nextband">
+      <p class="nextband__t">Pripravljeni na nove stene?</p>
+      <div class="nextband__a">
+        <a href="kontakt.html" class="btn btn--solid magnetic" data-cursor="hover"><span>Brezplačna ponudba</span></a>
+        <a href="vprasanja.html" class="btn btn--ghost magnetic" data-cursor="hover"><span>Pogosta vprašanja →</span></a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img class="footer__logo" src="assets/logo.png" alt="POBELI ME logotip" />
+        <p>Pleskarstvo z dušo. Vaš prostor, pobarvan v zgodbo — čisto, natančno in brez nereda.</p>
+        <a href="kontakt.html" class="btn btn--solid magnetic" data-cursor="hover"><span>Začni projekt</span></a>
+      </div>
+      <nav class="footer__col">
+        <h4>Storitve</h4>
+        <a href="storitve.html" data-cursor="hover">Barvanje sten</a>
+        <a href="storitve.html" data-cursor="hover">Kitanje &amp; priprava</a>
+        <a href="storitve.html" data-cursor="hover">Perfektne stene</a>
+        <a href="storitve.html" data-cursor="hover">Odvoz na deponijo</a>
+      </nav>
+      <nav class="footer__col">
+        <h4>Povezave</h4>
+        <a href="projekti.html" data-cursor="hover">Projekti</a>
+        <a href="postopek.html" data-cursor="hover">Postopek</a>
+        <a href="o-nas.html" data-cursor="hover">O nas</a>
+        <a href="vprasanja.html" data-cursor="hover">Pogosta vprašanja</a>
+      </nav>
+      <div class="footer__col">
+        <h4>Kontakt</h4>
+        <a href="tel:+38670577333" data-cursor="hover">Miha Pohar: 070 577 333</a><br><a href="tel:+38631544416" data-cursor="hover">Aljaž Skornšek: 031 544 416</a>
+        <a href="mailto:info@pobelime.si" data-cursor="hover">info@pobelime.si</a>
+        <a href="https://instagram.com/pobeli.me" data-cursor="hover">@pobeli.me</a>
+        <a data-cursor="hover">Maribor, Slovenija</a>
+      </div>
+    </div>
+    <p class="footer__tag">Barvamo · kitamo · počistimo · odpeljemo staro.</p>
+    <div class="footer__big">POBELI ME</div>
+    <div class="footer__row">
+      <p>© <span id="year"></span> Pobeli Me</p>
+      <a href="#vrh" data-cursor="hover">Nazaj na vrh ↑</a>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button class="totop" id="totop" aria-label="Nazaj na vrh" data-cursor="hover">↑</button>
+
+  <script src="script.js"></script>
+  <script src="tloris.js"></script>
+</body>
+</html>
