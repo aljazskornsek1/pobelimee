@@ -15,6 +15,7 @@
     window: { w: 1.2, h: 1.4, name: 'Okno' }     // 1,68 m²
   };
   const WORLD = 1000;
+  let WORLD_H = 1000;     // v celozaslonskem oknu je risalna ploskev višja kot široka
   const BG = '#fbf9f5';
   const fmt = (n, d = 0) => n.toLocaleString('sl-SI', { minimumFractionDigits: d, maximumFractionDigits: d });
 
@@ -102,7 +103,12 @@
     }
     return best ? { x: best.x, y: best.y } : c;
   };
-  const px = () => WORLD / (svg.getBoundingClientRect().width || WORLD);   // enot na zaslonski piksel
+  let kFixed = null;                                           // pri izvozu slike: velikost napisov glede na izrez
+  const px = () => {                                           // enot na zaslonski piksel
+    if (kFixed) return kFixed;
+    const m = svg.getScreenCTM();
+    return m && m.a ? 1 / m.a : 1;
+  };
 
   const rdp = (pts, eps) => {
     if (pts.length < 3) return pts.slice();
@@ -425,7 +431,7 @@
         }
         const half = fs * 2.3;
         const t = el('text', {
-          x: Math.min(WORLD - half, Math.max(half, mid.x + n.x * off)), y: Math.min(WORLD - fs, Math.max(fs, mid.y + n.y * off)),
+          x: Math.min(WORLD - half, Math.max(half, mid.x + n.x * off)), y: Math.min(WORLD_H - fs, Math.max(fs, mid.y + n.y * off)),
           class: 'plan__len' + (isSel ? ' is-sel' : ''), 'font-size': fs, 'text-anchor': 'middle', 'dominant-baseline': 'middle'
         }, gText);
         t.textContent = (state.calibrated ? '' : '≈') + fmt(L / state.upm, 2) + ' m';
@@ -514,6 +520,8 @@
     $('#planCeil').textContent = fmt(ceil, 0);
     $('#planTotal').textContent = fmt(total, 0);
     $('#planPrice').textContent = fmt(Math.round(total * state.rate), 0);
+    $('#planBarM2').textContent = fmt(total, 0);
+    $('#planBarPrice').textContent = fmt(Math.round(total * state.rate), 0);
     $('#planSend').disabled = state.rooms.length === 0;
     renderEditor();
   };
@@ -549,7 +557,10 @@
     }
   };
 
-  const select = s => { state.sel = s; flash = null; render(); };
+  const select = s => {
+    state.sel = s; flash = null; render();
+    if (full && s && (s.type === 'wall' || s.type === 'room' || s.type === 'opening')) setSheet(true);
+  };
 
   /* ---------- UREJANJE ---------- */
   const setWallLength = m => {
@@ -688,6 +699,7 @@
       return;
     }
     svg.setPointerCapture(e.pointerId);
+    setSheet(false);
     drawing = { pts: [toWorld(e)] };
   });
   svg.addEventListener('pointermove', e => {
@@ -713,7 +725,80 @@
   };
   svg.addEventListener('pointerup', finish);
   svg.addEventListener('pointercancel', () => { drawing = null; preview.setAttribute('points', ''); });
-  addEventListener('resize', render);
+  addEventListener('resize', () => { fitView(); render(); });
+
+  /* ---------- TELEFON: CELOZASLONSKO OKNO ---------- */
+  const grid = $('#planGrid'), panel = $('.plan__panel'), bar = $('#planSheetBar');
+  const home = grid.parentNode, anchor = grid.nextSibling;
+  const bgRect = $('.plan__bg', svg);
+  let full = false;
+  function setSheet(open) {
+    if (!full) open = false;
+    panel.classList.toggle('is-open', open);
+    bar.setAttribute('aria-expanded', open);
+    if (open) panel.scrollTop = 0;
+  }
+  function fitView() {
+    WORLD_H = WORLD;
+    if (full) {
+      const r = $('.plan__canvas', grid).getBoundingClientRect();
+      if (r.width > 0) WORLD_H = Math.max(WORLD, Math.round(WORLD * r.height / r.width));
+    }
+    svg.setAttribute('viewBox', `0 0 ${WORLD} ${WORLD_H}`);
+    bgRect.setAttribute('height', WORLD_H);
+  }
+  const card = $('#planMCard');
+  const updateCard = async () => {
+    if (!card) return;
+    const has = state.rooms.length > 0;
+    $('#planOpen span').textContent = has ? 'Nadaljuj risanje' : 'Začni risati';
+    if (!has) {
+      $('#planMImg').hidden = true;
+      $('#planMTitle').textContent = 'Izračunajte površino sten';
+      $('#planMSum').textContent = 'Narišite tloris čez cel zaslon — dobite površino sten in stropa ter okvirno ceno.';
+      return;
+    }
+    const t = state.rooms.reduce((a, r) => a + roomCalc(r).total, 0);
+    $('#planMTitle').textContent = `${fmt(t, 0)} m² · ${fmt(Math.round(t * state.rate), 0)} €`;
+    $('#planMSum').textContent = `${state.rooms.length} ${state.rooms.length === 1 ? 'prostor' : state.rooms.length === 2 ? 'prostora' : state.rooms.length < 5 ? 'prostori' : 'prostorov'} · stene in strop` +
+      (state.calibrated ? '' : ' · mere so še ocena');
+    const png = await toPng();
+    if (png) { $('#planMImg').src = png; $('#planMImg').hidden = false; }
+  };
+  const openFull = () => {
+    if (full) return;
+    full = true;
+    document.body.appendChild(grid);
+    grid.classList.add('is-full');
+    grid.setAttribute('role', 'dialog'); grid.setAttribute('aria-modal', 'true'); grid.setAttribute('aria-label', 'Risanje tlorisa');
+    document.documentElement.classList.add('plan-lock');
+    try { history.pushState({ planFull: 1 }, ''); } catch (e) {}
+    setSheet(false);
+    requestAnimationFrame(() => { fitView(); render(); });
+  };
+  const closeFull = fromPop => {
+    if (!full) return;
+    full = false;
+    setSheet(false);
+    grid.classList.remove('is-full');
+    grid.removeAttribute('role'); grid.removeAttribute('aria-modal'); grid.removeAttribute('aria-label');
+    home.insertBefore(grid, anchor);
+    document.documentElement.classList.remove('plan-lock');
+    fitView(); render(); updateCard();
+    if (!fromPop && history.state && history.state.planFull) history.back();
+    card && card.scrollIntoView({ block: 'center' });
+  };
+  // velikost platna se lahko spremeni (vrstica brskalnika na telefonu) — risalno ploskev prilagodimo
+  if (window.ResizeObserver) new ResizeObserver(() => { if (full) { fitView(); render(); } }).observe($('.plan__canvas', grid));
+  $('#planOpen')?.addEventListener('click', openFull);
+  $('#planClose').addEventListener('click', () => closeFull(false));
+  addEventListener('popstate', () => closeFull(true));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && full) closeFull(false); });
+  bar.addEventListener('click', () => setSheet(!panel.classList.contains('is-open')));
+  $('#planUndoTop').addEventListener('click', () => $('#planUndo').click());
+  $('#planClearTop').addEventListener('click', () => $('#planClear').click());
+  // če se zaslon razširi (obrat telefona), okno zapremo in tloris ostane na strani
+  matchMedia('(max-width: 760px)').addEventListener?.('change', e => { if (!e.matches) closeFull(false); });
 
   /* ---------- POŠLJI S POVPRAŠEVANJEM ---------- */
   const summaryText = () => {
@@ -726,9 +811,14 @@
       lines.join('\n') + `\nSkupaj za barvanje: ${fmt(t, 0)} m² · okvirno ${fmt(Math.round(t * state.rate), 0)} € (${state.rate} €/m²)`;
   };
   const toPng = () => new Promise(resolve => {
+    // napisi naj bodo na sliki vedno enako berljivi, ne glede na velikost zaslona
+    const ptsAll = state.rooms.flatMap(r => r.pts);
+    const span = Math.max(300, Math.max(...ptsAll.map(q => q.x)) - Math.min(...ptsAll.map(q => q.x)) + 140,
+      Math.max(...ptsAll.map(q => q.y)) - Math.min(...ptsAll.map(q => q.y)) + 140);
+    kFixed = span / 620; render();
     const clone = svg.cloneNode(true);
+    kFixed = null; render();
     clone.setAttribute('xmlns', NS);
-    clone.setAttribute('width', 1200); clone.setAttribute('height', 1200);
     clone.querySelector('#planPreview')?.remove();
     const ink = getComputedStyle(document.documentElement).getPropertyValue('--c-ink').trim() || '#101014';
     const style = document.createElementNS(NS, 'style');
@@ -737,13 +827,24 @@
       `text{font-family:Inter,Arial,sans-serif;fill:${ink}}.plan__len{font-weight:600;paint-order:stroke;stroke:${BG};stroke-width:4px}` +
       `.plan__name{fill:#56524c}.plan__area{font-weight:700}`;
     clone.insertBefore(style, clone.firstChild);
+    // izrez samo okoli narisanih prostorov
+    const all = state.rooms.flatMap(r => r.pts);
+    const pad = 70;
+    let x0 = Math.min(...all.map(q => q.x)) - pad, x1 = Math.max(...all.map(q => q.x)) + pad;
+    let y0 = Math.min(...all.map(q => q.y)) - pad, y1 = Math.max(...all.map(q => q.y)) + pad;
+    const vw = Math.max(300, x1 - x0), vh = Math.max(300, y1 - y0);
+    x0 -= (vw - (x1 - x0)) / 2; y0 -= (vh - (y1 - y0)) / 2;
+    const W = 1200, H = Math.round(Math.min(1800, W * vh / vw));
+    clone.setAttribute('viewBox', `${x0} ${y0} ${vw} ${vh}`);
+    clone.setAttribute('width', W); clone.setAttribute('height', H);
+    clone.setAttribute('preserveAspectRatio', 'xMidYMid meet');
     const bg = document.createElementNS(NS, 'rect');
-    bg.setAttribute('width', WORLD); bg.setAttribute('height', WORLD); bg.setAttribute('fill', BG);
+    bg.setAttribute('x', x0 - 50); bg.setAttribute('y', y0 - 50); bg.setAttribute('width', vw + 100); bg.setAttribute('height', vh + 100); bg.setAttribute('fill', BG);
     clone.insertBefore(bg, clone.firstChild.nextSibling);
     const img = new Image();
     img.onload = () => {
-      const c = document.createElement('canvas'); c.width = 1200; c.height = 1200;
-      c.getContext('2d').drawImage(img, 0, 0, 1200, 1200);
+      const c = document.createElement('canvas'); c.width = W; c.height = H;
+      c.getContext('2d').drawImage(img, 0, 0, W, H);
       try { resolve(c.toDataURL('image/png')); } catch (e) { resolve(null); }
     };
     img.onerror = () => resolve(null);

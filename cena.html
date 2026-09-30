@@ -178,7 +178,24 @@
           površino in ceno, tloris pa nam lahko pošljete skupaj s povpraševanjem.</p>
       </div>
 
-      <div class="plan__grid reveal">
+      <!-- telefon: risanje se odpre v celozaslonskem oknu -->
+      <div class="plan__mcard reveal" id="planMCard">
+        <img id="planMImg" alt="Vaš tloris" hidden />
+        <div class="plan__mtxt">
+          <b id="planMTitle">Izračunajte površino sten</b>
+          <p id="planMSum">Narišite tloris čez cel zaslon — dobite površino sten in stropa ter okvirno ceno.</p>
+        </div>
+        <button type="button" class="btn btn--solid" id="planOpen"><span>Začni risati</span></button>
+      </div>
+
+      <div class="plan__grid reveal" id="planGrid">
+        <div class="plan__top">
+          <button type="button" class="plan__x" id="planClose" aria-label="Zapri risanje">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+          <b>Površina sten</b>
+          <button type="button" class="plan__tbtn" id="planUndoTop">Razveljavi</button>
+          <button type="button" class="plan__tbtn" id="planClearTop">Počisti</button>
+        </div>
         <div class="plan__board">
           <ol class="plan__steps" aria-label="Koraki">
             <li data-step="1"><span>1</span>Prostori</li>
@@ -221,6 +238,11 @@
         </div>
 
         <aside class="plan__panel calc__card" aria-label="Izračun iz tlorisa">
+          <button type="button" class="plan__sheetbar" id="planSheetBar" aria-expanded="false">
+            <span>Stene + strop <b id="planBarM2">0</b> m²</span>
+            <span><b id="planBarPrice">0</b> €</span>
+            <i aria-hidden="true"></i>
+          </button>
           <p class="plan__scale" id="planScale" hidden>Mere so zaenkrat ocena. Z orodjem <b>Mere</b> tapnite en zid in vpišite njegovo dolžino.</p>
 
           <div class="plan__editor" id="planEditor" hidden>

@@ -787,3 +787,51 @@ body.lock .nav,.nav.open-burger{background:transparent!important;border-bottom-c
 .plan__hin input.is-bad,.plan__inrow input.is-bad{border-color:#ff5e7e}
 .plan__small{margin:-4px 0 0;font-size:12.5px;color:rgba(246,243,238,.55)}
 .calc__qh{margin-top:-6px}
+/* ---------- TLORIS NA TELEFONU: celozaslonsko okno ---------- */
+.plan__top,.plan__sheetbar,.plan__mcard{display:none}
+@media (max-width:760px){
+  .plan__grid:not(.is-full){display:none}
+  .plan__mcard{display:grid;gap:16px;padding:20px;border-radius:22px;background:var(--c-ink);color:var(--c-canvas)}
+  .plan__mcard img{width:100%;max-height:300px;object-fit:contain;border-radius:14px;background:#fbf9f5}
+  .plan__mtxt b{display:block;font-family:var(--ff-serif);font-size:24px;font-weight:600;margin-bottom:6px}
+  .plan__mtxt p{margin:0;color:rgba(246,243,238,.7);font-size:15px;line-height:1.5}
+  .plan__mcard .btn{justify-self:stretch;justify-content:center}
+}
+html.plan-lock,html.plan-lock body{overflow:hidden;overscroll-behavior:none}
+.plan__grid.is-full{position:fixed;inset:0;z-index:5000;display:flex;flex-direction:column;gap:0;margin:0;
+  height:100vh;height:100dvh;background:var(--c-canvas);opacity:1;transform:none;transition:none}
+.is-full .plan__top{display:flex;align-items:center;gap:6px;padding:calc(env(safe-area-inset-top) + 8px) 10px 8px;flex:none}
+.is-full .plan__top b{flex:1;font-family:var(--ff-serif);font-size:18px;font-weight:600;margin-left:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.plan__x{width:44px;height:44px;flex:none;display:grid;place-items:center;border-radius:50%;border:1px solid var(--c-line);background:#fff;color:var(--c-ink);cursor:pointer}
+.plan__x svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.plan__tbtn{min-height:40px;padding:0 13px;border-radius:999px;border:1px solid var(--c-line);background:#fff;color:var(--c-ink);font:600 13.5px var(--ff-sans);cursor:pointer}
+.plan__tbtn:active,.plan__x:active{background:#efe9e0}
+.is-full .plan__board{flex:1;min-height:0;display:flex;flex-direction:column;gap:8px;padding:0 10px calc(66px + env(safe-area-inset-bottom))}
+.is-full .plan__steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.is-full .plan__steps li{padding:5px 6px;gap:5px;font-size:11px;line-height:1.15;border-radius:10px}
+.is-full .plan__steps li span{width:18px;height:18px;font-size:10.5px}
+.is-full .plan__tools{gap:6px}
+.is-full .plan__tool{min-height:40px;font-size:13.5px;padding:0 6px;gap:5px}
+.is-full .plan__hint{min-height:0;padding:8px 12px;font-size:13px;line-height:1.4;border-radius:12px}
+.is-full .plan__canvas{flex:1;min-height:0;aspect-ratio:auto;border-radius:16px}
+.is-full .plan__aux{display:none}
+.is-full .plan__panel{position:absolute;left:0;right:0;bottom:0;z-index:2;max-height:calc(66px + env(safe-area-inset-bottom));overflow:hidden;
+  border-radius:22px 22px 0 0;padding:0 16px calc(16px + env(safe-area-inset-bottom));gap:14px;box-shadow:0 -12px 40px rgba(16,16,20,.25);
+  transition:max-height .3s var(--ease)}
+.is-full .plan__panel.is-open{max-height:58dvh;overflow-y:auto;overscroll-behavior:contain}
+.is-full .plan__sheetbar{display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:1;margin:0 -16px;padding:0 18px;min-height:66px;
+  width:calc(100% + 32px);border:0;background:var(--c-ink);color:var(--c-canvas);font:500 15px var(--ff-sans);cursor:pointer;text-align:left}
+.plan__sheetbar span:first-child{flex:1}
+.plan__sheetbar span:nth-child(2) b{font-family:var(--ff-serif);font-size:22px;color:var(--c-yellow)}
+.plan__sheetbar i{width:10px;height:10px;border-left:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg) translate(2px,2px);transition:transform .3s}
+.plan__panel.is-open .plan__sheetbar i{transform:rotate(225deg) translate(2px,2px)}
+.is-full .plan__hint{height:calc(1.38em * 4 + 16px);line-height:1.38;font-size:12.5px;overflow:hidden;flex:none;box-sizing:border-box}
+.is-full .plan__steps li{white-space:normal}
+.is-full .plan__top b{min-width:0;font-size:16px}
+@media (max-width:380px){
+  .is-full .plan__top{gap:5px;padding-left:8px;padding-right:8px}
+  .plan__tbtn{padding:0 10px;font-size:13px}
+  .plan__x{width:40px;height:40px}
+}
+.plan__mcard .btn{background:var(--c-canvas);color:var(--c-ink);min-height:54px}
+.plan__mcard .btn::before{background:linear-gradient(110deg,var(--c-pink),var(--c-orange),var(--c-yellow))}
