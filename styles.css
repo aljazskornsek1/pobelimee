@@ -840,3 +840,12 @@ html.plan-lock,html.plan-lock body{overflow:hidden;overscroll-behavior:none}
 }
 .plan__mcard .btn{background:var(--c-canvas);color:var(--c-ink);min-height:54px}
 .plan__mcard .btn::before{background:linear-gradient(110deg,var(--c-pink),var(--c-orange),var(--c-yellow))}
+/* noga: kontakt in gumb */
+.footer__col .footer__person{display:grid;gap:2px;font-variant-numeric:tabular-nums}
+.footer__person small{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(246,243,238,.45);transition:color .3s}
+.footer__person:hover small{color:inherit}
+.footer__place{color:rgba(246,243,238,.55);font-size:15.5px}
+.footer__brand .btn--solid{background:var(--c-canvas);color:var(--c-ink)}
+.footer__brand .btn--solid::before{background:linear-gradient(110deg,var(--c-pink),var(--c-orange),var(--c-yellow))}
+.footer__brand .btn--solid:hover{color:var(--c-ink)}
+.contact__plain{font-size:17px;font-family:var(--ff-serif);font-weight:400;text-align:right}
