@@ -123,6 +123,14 @@
 
   /* ---------- FORM ---------- */
   const form = $('#form'), note = $('#formNote');
+  // tip projekta vnaprej izberemo po izbiri v kalkulatorju ali tlorisu
+  const tipSel = $('#tip');
+  if (tipSel) {
+    let r = new URLSearchParams(location.search).get('storitev');
+    if (!r) { try { r = (JSON.parse(localStorage.getItem('pobeli_tloris') || 'null') || {}).rate; } catch (e) {} }
+    const opt = r && [...tipSel.options].find(o => o.text.includes('(' + r + ' €/m²)'));
+    if (opt) tipSel.value = opt.value;
+  }
   const fileInput = $('#slike'), fileStatus = $('#fileStatus'), filePreview = $('#filePreview');
   const maxPhotos = 8, maxPhotoSize = 40 * 1024 * 1024, maxTotalSize = 200 * 1024 * 1024;
   const clearPhotoPreviews = () => {
@@ -152,7 +160,7 @@
       return;
     }
     fileStatus.textContent = files.length === 0
-      ? 'Izberite fotografije sten'
+      ? 'Ni izbranih fotografij'
       : files.length === 1
         ? `Izbrana fotografija: ${files[0].name}`
         : `Izbranih je ${files.length} fotografij`;
@@ -271,7 +279,7 @@
       note.textContent = `Hvala, ${ime}! Povpraševanje je poslano, oglasimo se v 24 urah.` + (skipped ? ` (${skipped} fotografij ni bilo mogoče odpreti — pošljite jih na info@pobelime.si.)` : '');
       form.reset();
       clearPhotoPreviews();
-      if (fileStatus) fileStatus.textContent = 'Izberite fotografije sten';
+      if (fileStatus) fileStatus.textContent = 'Ni izbranih fotografij';
       $$('.field').forEach(f => f.classList.remove('error'));
     } catch (err) {
       note.style.color = 'var(--c-pink)';
@@ -364,8 +372,11 @@
       qH.addEventListener('input', () => { qH.classList.toggle('is-bad', !setH(val(), true) && qH.value.trim() !== ''); });
       qH.addEventListener('change', () => { if (setH(val())) qH.classList.remove('is-bad'); else qH.value = height.toFixed(2); });
     }
+    const cta = $('#kalkulator .calc__result a[href^="kontakt.html"]');
+    if (cta) cta.href = 'kontakt.html?storitev=' + rate + '#form';
     $$('#kalkulator .calc__opt').forEach(o => o.addEventListener('click', () => {
       rate = +o.dataset.rate;
+      if (cta) cta.href = 'kontakt.html?storitev=' + rate + '#form';
       $$('#kalkulator .calc__opt').forEach(b => b.classList.toggle('is-active', b === o));
       render();
     }));

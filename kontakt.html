@@ -98,37 +98,39 @@
 
         <form class="form reveal" id="form" action="/api/contact" method="post" novalidate>
           <div class="field">
-            <input type="text" id="ime" name="ime" required placeholder=" " data-cursor="hover" />
             <label for="ime">Ime in priimek</label>
+            <input type="text" id="ime" name="ime" required autocomplete="name" placeholder="npr. Janez Novak" data-cursor="hover" />
           </div>
           <div class="field">
-            <input type="email" id="email" name="email" required placeholder=" " data-cursor="hover" />
             <label for="email">E-pošta</label>
+            <input type="email" id="email" name="email" required autocomplete="email" inputmode="email" placeholder="ime@primer.si" data-cursor="hover" />
           </div>
           <div class="field">
-            <input type="tel" id="tel" name="tel" placeholder=" " data-cursor="hover" />
-            <label for="tel">Telefon (neobvezno)</label>
+            <label for="tel">Telefon <small>(neobvezno)</small></label>
+            <input type="tel" id="tel" name="tel" autocomplete="tel" placeholder="npr. 041 123 456" data-cursor="hover" />
           </div>
           <div class="field">
-            <select id="tip" name="tip" data-cursor="hover" required>
-              <option value="" disabled selected></option>
-              <option>Barvanje sten</option>
-              <option>Kitanje &amp; priprava</option>
-              <option>Perfektne stene</option>
-              <option>Odvoz na deponijo</option>
-              <option>Drugo</option>
-            </select>
             <label for="tip">Tip projekta</label>
+            <select id="tip" name="tip" data-cursor="hover" required>
+              <option value="" disabled selected>Izberite storitev</option>
+              <option>Enojni premaz (4 €/m²)</option>
+              <option>Dvojni premaz (5 €/m²)</option>
+              <option>Kitanje + brušenje (7 €/m²)</option>
+              <option>Celovito · kitanje + brušenje + emulzija + 2× premaz (10 €/m²)</option>
+            </select>
           </div>
           <div class="field field--full">
-            <textarea id="sporocilo" name="sporocilo" rows="3" placeholder=" " data-cursor="hover"></textarea>
             <label for="sporocilo">Povejte nam več o prostoru</label>
+            <textarea id="sporocilo" name="sporocilo" rows="4" placeholder="npr. stanovanje 60 m², tri sobe in hodnik, strop 2,6 m, želen termin …" data-cursor="hover"></textarea>
           </div>
           <div class="field field--full field--file">
-            <label for="slike">Fotografije sten</label>
+            <span class="file__title">Fotografije sten</span>
             <p>Dodajte do 8 fotografij sten ali prostorov. Tako vam lahko pripravimo natančnejšo prvo oceno.</p>
-            <input type="file" id="slike" name="slike[]" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple data-cursor="hover" aria-describedby="fileStatus fileRules" />
-            <span class="file__status" id="fileStatus">Izberite fotografije sten</span>
+            <div class="file__row">
+              <input type="file" id="slike" name="slike[]" class="file__input" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple aria-describedby="fileStatus fileRules" />
+              <label for="slike" class="file__btn" data-cursor="hover">Izberi fotografije</label>
+              <span class="file__status" id="fileStatus">Ni izbranih fotografij</span>
+            </div>
             <small class="file__rules" id="fileRules">JPG, PNG, WEBP ali HEIC · največ 8 fotografij · pred pošiljanjem jih samodejno pomanjšamo</small>
             <div class="file__preview" id="filePreview" aria-live="polite"></div>
           </div>

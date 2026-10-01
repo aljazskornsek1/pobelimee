@@ -854,7 +854,7 @@
     if (!state.rooms.length) return;
     $('#planSend').disabled = true;
     const png = await toPng();
-    try { localStorage.setItem(STORE, JSON.stringify({ png, summary: summaryText() })); } catch (e) {}
+    try { localStorage.setItem(STORE, JSON.stringify({ png, summary: summaryText(), rate: state.rate })); } catch (e) {}
     location.href = 'kontakt.html#form';
   });
 
